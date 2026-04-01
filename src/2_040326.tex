@@ -58,5 +58,29 @@ for some $A \subseteq \Rn$ and some $f : \Rn \to \R$. We will restrict ourselfs 
     
     Let $f : \Rn \to \R$. We say that $\bar{x} \in \Rn$ is a \emph{local maximum} for $f$ if there exists a neighbourhood $U$ of $\bar{x}$ such that $f(x) \le f(\bar{x})$ for every $x \in U$. A \emph{local strict maximum} has the strict inequality.
 
+    Similarly, $\bar{x}$ is \emph{local minumum} for $f$ if $\exists U$ neighbourhood of $\bar{x}$ such that $f(x) \ge f(\bar{x})$ for all $x \in U$.
+
+    If there exists $\bar{x}$ such that $f(x) = \displaystyle \inf_{x \in A} f(x)$, the $\bar{x}$ is a \emph{global minimum} over $A$.
+
 \end{definition}
+
+\begin{definition}
+    
+    We denote with $\arg_{x \in A}\min f(x)$ the set of minumum points for $f$ over $A$, i.e 
+
+    \[ \arg_{x \in A}\min f(x) = \set{\bar{x} \in \Rn : f(\bar{x}) = \inf_{x \in A} f(x)}. \]
+
+\end{definition}
+
+\begin{theorem}[Weierstrass]
+
+    Let $A \subseteq \Rn$ be a compact set, $f : A \to \R$ a continous function. The there exists $x_m$, $x_M \in A$ such that
+    
+    \begin{align*}
+        f(x_m) &= \min_{x \in A} f(x) \\
+        f(x_M) &= \max_{x \in A} f(x).
+    \end{align*}
+    
+\end{theorem}
+
 
