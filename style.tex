@@ -1,0 +1,26 @@
+% ============================================================
+% Formattazione Titolo Capitolo (Stile Display)
+% ============================================================
+
+% 1. Forza lo stile "prefisso" (mette il numero sopra il titolo)
+\KOMAoption{chapterprefix}{true}
+
+% 2. Centra tutto l'intestazione del capitolo
+\let\raggedchapter\centering
+
+% 3. Definisce lo spazio tra "Capitolo X" e il "Titolo"
+% Usiamo \renewcommand perché KOMA ha un'impostazione specifica per questo
+\renewcommand*{\chapterheadmidvskip}{\vskip 15pt}
+
+% 4. Configura le distanze (Sopra e Sotto)
+\RedeclareSectionCommand[
+  beforeskip=-30pt,
+  afterskip=40pt
+]{chapter}
+
+% 5. Opzionale: Se vuoi personalizzare la scritta "Chapter 1" 
+% e renderla diversa dal titolo (es. più piccola o meno grassetta)
+\setkomafont{chapterprefix}{\normalfont\small\scshape}
+\setkomafont{chapter}{\normalfont\Large\bfseries\scshape}
+
+\setkomafont{section}{\normalfont\Large\bfseries\scshape}
