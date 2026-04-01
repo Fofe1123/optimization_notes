@@ -5,6 +5,7 @@
 \usepackage{tikz}
 \usepackage{float}
 \usepackage{pgfplots}
+\usepackage{tcolorbox}
 \pgfplotsset{compat=1.18}
 
 %%% tikz options
@@ -16,41 +17,6 @@
 \usepackage{mathpazo}
 \usepackage{mathrsfs}  
 \usepackage{newpxtext}
-
-%%%% theorem styles
-
-\theoremstyle{plain}
-\newtheorem{theorem}{\normalfont\bfseries\scshape Theorem}[section]
-\newtheorem{proposition}[theorem]{\normalfont\bfseries\scshape Proposition}
-
-\newtheoremstyle{myplain}% Custom style for theorems
-    {1ex}% Space above
-    {1ex}% Space below
-    {\itshape}% Body font
-    {}% Indent amount
-    {\bfseries}% Theorem head font
-    {.}% Punctuation after theorem head
-    {0.5em}% Space after theorem head
-    {}% Theorem head spec
-
-\newtheoremstyle{mydefinition}% Custom style for definitions and similar environments
-    {1ex}% Space above
-    {1ex}% Space below
-    {\normalfont}% Body font
-    {}% Indent amount
-    {\bfseries}% Theorem head font
-    {.}% Punctuation after theorem head
-    {0.5em}% Space after theorem head
-    {}% Theorem head spec
-
-\theoremstyle{myplain}
-\newtheorem{lemma}[theorem]{\normalfont\bfseries\scshape Lemma}
-\newtheorem{corollary}[theorem]{\normalfont\bfseries\scshape Corollary}
-
-\theoremstyle{mydefinition}
-\newtheorem{definition}[theorem]{\normalfont\bfseries\scshape Definition}
-\newtheorem{example}[theorem]{Example}
-\newtheorem{remark}[theorem]{Remark}
 
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Rn}{\mathbb{R}^n}
@@ -64,5 +30,4 @@
 \newcommand{\scp}{\cdot} % scalar product
 \newcommand{\dd}{\mathrm{d}}
 
-\renewcommand{\thetheorem}{\arabic{theorem}}
 \renewcommand{\qedsymbol}{$\blacksquare$}

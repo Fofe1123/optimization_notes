@@ -24,3 +24,63 @@
 \setkomafont{chapter}{\normalfont\Large\bfseries\scshape}
 
 \setkomafont{section}{\normalfont\Large\bfseries\scshape}
+
+%% ============================================================
+% Definizione Ambiente Axiom (Versione Fixata)
+% ============================================================
+\tcbuselibrary{theorems, skins} % <--- AGGIUNTO 'skins' QUI
+
+\newtcbtheorem[]{axiom}{Axiom}{
+  enhanced,                              % Abilita il motore grafico avanzato
+  sharp corners,
+  boxrule=0.5pt,
+  colback=orange!10!white,
+  colframe=orange!80!black,
+  fonttitle=\bfseries\sffamily,
+  coltitle=white,
+  boxed title style={
+    colback=orange!80!black,
+    sharp corners,
+    boxrule=0.5pt
+  },
+  % ------------------------------------
+  separator sign={\ ---},
+  description font=\itshape,
+  before skip=15pt,
+  after skip=15pt,
+}{ax}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{\normalfont\bfseries\scshape Theorem}[section]
+\newtheorem{proposition}[theorem]{\normalfont\bfseries\scshape Proposition}
+
+\newtheoremstyle{myplain}% Custom style for theorems
+    {1ex}% Space above
+    {1ex}% Space below
+    {\itshape}% Body font
+    {}% Indent amount
+    {\bfseries}% Theorem head font
+    {.}% Punctuation after theorem head
+    {0.5em}% Space after theorem head
+    {}% Theorem head spec
+
+\newtheoremstyle{mydefinition}% Custom style for definitions and similar environments
+    {1ex}% Space above
+    {1ex}% Space below
+    {\normalfont}% Body font
+    {}% Indent amount
+    {\bfseries}% Theorem head font
+    {.}% Punctuation after theorem head
+    {0.5em}% Space after theorem head
+    {}% Theorem head spec
+
+\theoremstyle{myplain}
+\newtheorem{lemma}[theorem]{\normalfont\bfseries\scshape Lemma}
+\newtheorem{corollary}[theorem]{\normalfont\bfseries\scshape Corollary}
+
+\theoremstyle{mydefinition}
+\newtheorem{definition}[theorem]{\normalfont\bfseries\scshape Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+
+\renewcommand{\thetheorem}{\arabic{theorem}}

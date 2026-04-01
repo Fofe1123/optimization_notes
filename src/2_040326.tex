@@ -6,4 +6,57 @@ Our main focus from now on is to solve the problem
 
 for some $A \subseteq \Rn$ and some $f : \Rn \to \R$. We will restrict ourselfs only to certain functions and sets.
 
-\
+\begin{definition}[Infimum/supremum]
+    
+    Let $E \subseteq \R$. We denote with $\inf E =$ largest $z \in \R$ such that $z \le x$ for every $x \in E$. By convention we set $\inf \emptyset = +\infty$. 
+
+    Similarly, we denote with $\sup E$ the smallest $z \in \R$ such that $z \ge x$ for every $x \in E$, with the convention $\sup \emptyset = -\infty$. More formally, 
+
+    \begin{align*}
+        z &= \inf E \quad \text{ if } z \le x \,\forall x \in E \text{ and } \forall \eps > 0\, \exists y \in E \text{ s.t. } y \le z + \eps \\
+        z &= \sup E \quad \text{ if } z \ge x \,\forall x \in E \text{ and } \forall \eps > 0\, \exists y \in E \text{ s.t. } y \ge z - \eps 
+    \end{align*}
+
+\end{definition}
+
+\begin{remark}
+    
+    The $\inf$ and $\sup$ aren't necessarely inside the set. If they are, we speak of $\min$ and $\max$.
+
+\end{remark}
+
+\begin{axiom}{Completeness of $\mathbb{R}$}{completeness}
+    Every bounded sequence $\set{x_n}_{n \in \N} \subseteq \R$ admits a supremum  in $\R$.
+\end{axiom}
+
+\begin{theorem}[Bolzano-Weierstrass]
+
+    Any bounded sequence $\set{x_n}_{n \in \N} \subseteq \R$ admits a cluster point, i.e. there exists $\bar{x} \in \R$ and a subsequence $\set{x_{n_j}}_{j \in \N}$ such that $x_{n_j} \to \bar{x}$ as $j \to +\infty$.
+    
+\end{theorem}
+
+\begin{proof}
+    
+    Since $\set{x_n}_n$ is bounded, there exists $R > 0$ such that $x_n \in [-R,R]$ for every $n \in \N$. Set $I_1 = [-R,R]$, select $x_{n_1}$ a value in $I_1$. Divide $I_1$ in half and select the one subinterval containing inifitely many $x_n$s, call it $I_2 = [a_2,b_2]$ (here $a_2 = -R, b_2 = 0$ or $a_2 = 0, b_2 = R$). We have $I_2 \subset I_1$, $\abs{I_2} = \abs{I_1}/2$, and choose $x_{n_2}$ a value in $I_2$. Repeat this process to cut and select. We end up, at the $k$-th step, with a sequence of subintervals $I_1,I_2,\dots,I_k$ and 3 subsequences: $x_{n_1},x_{n_2}, \dots, x_{n_k}$ the sequence of selected values, $a_1,a_2,\dots,a_k$ the sequence of left boundaries and $b_1,b_2,\dots,b_k$ the sequence of right boundaries.
+
+    We observe that $a_{j+1} \ge a_j$ and $b_{j+1} \le b_j$ for all $1 \le j \le k$. Moreover, $a_j \le R$ and $b_j \ge -R$ for all $j$, so, by the axiom of completeness of $\R$, 
+
+    \begin{itemize}
+        \item there exists $\bar{a} \in \R$ such that $a_k \to \bar{a} = \displaystyle\sup_k a_k$
+        \item there exists $\bar{b} \in \R$ such that $b_k \to \bar{b} = \displaystyle\inf_k b_k$ 
+    \end{itemize}
+
+    We observe that $\bar{a} = \bar{b}$. Indeed, $\abs{\bar{b} - \bar{a}} = \abs{\bar{b} - b_k + b_k - a_k + a_k -\bar{a}} \le \abs{\bar{b} - b_k} + \abs{\bar{a} - a_k} + \abs{b_k - a_k}$. The terms $\abs{\bar{b} - b_k}$ and $\abs{\bar{a} - a_k}$ goes to 0 as $k \to +\infty$ for what we observed before. Moreover, $\abs{b_k - a_k} = 2R/2^{k-1} \to 0$ as $k \to +\infty$. 
+
+    Set $\bar{x} = \bar{a} (= \bar{b})$. Then the subsequence $\set{x_{n_j}}_j$ is converging to $\bar{x}$: indeed $ \abs{x_{n_j} - \bar{x}} = \abs{x_{n_j} - a_j + a_j - \bar{x}} \le \abs{a_{n_j} - a_j} + \abs{a_j - \bar{x}}$.
+
+    Since $a_j \to \bar{x} = \bar{a}$, the term $\abs{a_j - \bar{x}} \to 0$. Notice that, by construction, $x_{n_j} \in I_j$, so $\abs{x_{n_j} - a_j} \le \abs{I_j} \to 0$.
+
+\end{proof}
+
+\begin{definition}
+    
+    Let $f : \Rn \to \R$. We say that $\bar{x} \in \Rn$ is a \emph{local maximum} for $f$ if there exists a neighbourhood $U$ of $\bar{x}$ such that $f(x) \le f(\bar{x})$ for every $x \in U$. A \emph{local strict maximum} has the strict inequality.
+
+\end{definition}
+
