@@ -1,4 +1,4 @@
-\chapter{Lecture 1 of 03/03/2026}
+\chapter{Lecture of 03/03/2026}
 
 \section{A quick summary of calculus 1 \& 2}
 
@@ -17,3 +17,194 @@
     \[ \norm{x} = \sqrt{\langle x,x\rangle}. \]
 
 \end{definition}
+
+\begin{definition}[Open ball]
+    
+    Given $x \in \Rn$, $r > 0$ we call the \emph{open ball of radius} $r$ \emph{centered in } $x$ the set 
+
+    \[ B(x,r) = \set{y \in \Rn : \norm{y - x} < r}. \] 
+
+\end{definition}
+
+\begin{figure}[ht!]
+
+    \centering
+    
+    \begin{tikzpicture}[scale=1.5, >=stealth]
+        % Assi coordinati (opzionali, giusto per contesto)
+        \draw[->] (-1,0) -- (3,0) node[right] {\tiny $x$};
+        \draw[->] (0,-1) -- (0,2) node[above] {\tiny $y$};
+
+        % Definizione delle variabili per raggio e centro
+        \def\r{0.8}
+        \def\cx{1.5}
+        \def\cy{0.8}
+
+        % La palla aperta
+        % fill: colore interno (trasparente con opacity)
+        % draw: bordo tratteggiato (dashed) per indicare che è aperta
+        \draw[blue, dashed, fill=blue!10] (\cx, \cy) circle (\r);
+
+        % Il centro x
+        \filldraw (\cx, \cy) circle (1pt) node[below left] {$x$};
+
+        % Il raggio r
+        \draw[->] (\cx, \cy) -- ++(30:\r) node[midway, above] {$r$};
+        
+        % Etichetta della palla
+        \node[blue] at (\cx + \r, \cy + \r) {$B_r(x)$};
+    \end{tikzpicture}
+
+    \caption{Ball of radius $r$ centered in $x$ on $\R^2$.}
+
+\end{figure}
+
+\begin{definition}[Limit of a sqeuence]
+
+    Let $\set{x_n}_{n \in \N} \subseteq \Rn$, $\bar{x} \in \Rn$. We say that $x_n$ converges to $\bar{x}$, and write $x_n \to \bar{x}$ if for every $\eps > 0$ there exists an $N > 0$ such that for every $k > N$, $x_k \in B(\bar{x},\eps)$, i.e. for $k$ big enough, $\norm{\bar{x} - x_k} < \eps$, and we say that
+
+    \[ \lim_{k \to +\infty} x_k = \bar{x}. \]
+
+\end{definition}
+
+\begin{remark}
+    
+    The limit in $\Rn$ is the pointwise limit, so $x_k \to \bar{x}$ if and only if $(x_k)_j \to (\bar{x})_j$ for any $1 \le j \le n$.
+
+\end{remark}
+
+\begin{example}
+    
+    Consider the sequence $\set{x_k}_{k \in \N}$ defined as
+
+    \[ x_k = \left( \frac1k, \frac1k \sin(k) \right) \to (0,0) \]
+
+    as $k \to +\infty$.
+
+\end{example}
+
+\begin{definition}[Open/closed set]
+    
+    Let $A \subseteq \Rn$. We say that $A$ is \emph{open} if for every $x \in A$ there exists an $\eps > 0$ such that $B(x,\eps) \subseteq A$. We say that $A$ is \emph{closed} if $\Rn \setminus A$ is open.
+
+\end{definition}
+
+\begin{example}
+    
+    Consider the set 
+
+    \[ A = \set{(x_1,x_2) \in \R^2 : \abs{x_1} < 1, \abs{x_2} < 1}. \]
+
+    We can easly verify that $A$ is open. Observe that a set can be neither open nor closed. The sets $\Rn$ and $\emptyset$ are both open and closed at the same time.
+
+\end{example}
+
+\begin{definition}[Neighbour]
+    
+    We say that, for a given $x \in \Rn$, a subset $A \subseteq \Rn$ is a \emph{neighbour} of $x$ if $A$ is an open set containing $x$.
+
+\end{definition}
+
+\begin{definition}[Interior, exterior, boundary, closure]
+
+    Let $A \subseteq \Rn$, $x \in \Rn$. We say that $x$ is:
+    
+    \begin{itemize}
+        \item an \emph{interior point} for $A$ if $\exists \eps > 0$ such that $B(x,\eps) \subseteq A$. We denote the set of all interior points of $A$ with $A^\circ$;
+        \item A \emph{boundary point} for $A$ if $\forall \eps > 0$, $B(x,\eps) \cap A \neq \emptyset$ and $B(x,\eps) \cap A^C \neq \emptyset$. We denote the set of all the boundary points with $\partial A$;
+        \item an \emph{exterior point} for $A$ if $\exists \eps > 0$ such that $B(x,\eps) \subseteq A^C$.
+    \end{itemize}
+
+    We denote the \emph{closure} of $A$ as $\bar{A} = A \cup \partial A$.
+
+\end{definition}
+
+\begin{proposition}
+    
+    Let $\set{A_k}_{k \in \N}$ a sequence of open sets. Then:
+
+    \begin{enumerate}
+        \item[$i)$] the countable union of open sets is open, i.e.
+            \[ \bigcup_{k \in \N} A_k \text{ is open}; \]
+        \item[$ii)$] the \emph{finite intersection} of open sets is open, i.e. for $N \in \N$, 
+            \[ \bigcap_{i  = 1}^N A_i \text{ is open}. \]
+    \end{enumerate}
+
+\end{proposition}
+
+\begin{proof}
+
+    We prove $i)$ and $ii)$ separately.
+    
+    \paragraph{$i)$:} set $E = \displaystyle\bigcup_{k = 1}^{+\infty} A_k$. Given $x \in A$ then there exits $m > 0$ such that $x \in A_m$. Since $A_m$ is open, there exists $\eps > 0$ such that $B(x,\eps) \subseteq A_m \subseteq E$, so we found an open ball containing $x$ fully contained in $E$. Since the choice of $x$ is arbitrary, this must hold for every $x \in E$, hence $E$ is open.
+
+    \paragraph{$ii)$:} set $E = \displaystyle\bigcap_{k = 1}^N A_k$. Let $x \in E$, then $x \in A_k$ for every $1 \le k \le N$, hence there exists a sequence $\eps_k > 0$ such that $B(x,\eps_k) \subseteq A_k$ for every $k < N$. Consider $\bar{\eps} = \displaystyle\frac12\min_k \eps_k > 0$. Then $B(x,\bar{\eps}) \subseteq B(x,\bar{\eps})$ for every $k$, hence $B(x,\bar{\eps}) \subseteq E$. Again, since the choice of $x$ is arbitrary, this must hold true for every $x \in E$, hence $E$ is open.
+
+\end{proof}
+
+\begin{proposition}[Characterization of closed sets]
+
+    Let $C \subseteq \Rn$. Then $C$ is closed $\iff$ for every sequence $\set{x_k}_{k \in \N} \subseteq C$ such that $x_k \to \bar{x}$, then $\bar{x} \in C$. 
+    
+\end{proposition}
+
+\begin{proof}
+    
+    We prove $\implies$ and $\impliedby$.
+
+    \paragraph{''$\implies$'':} let $C \subseteq \Rn$ be closed. Consider $\set{x_k}_{k \in \N}$ such that $x_k \to \bar{x} \in \Rn$, we wanto to show that $\bar{x} \in C$. Assume, by contraddiction, that $\bar{x} \notin C \implies \bar{x} \in \Rn \setminus C$, which is an open set, so there exists $\eps > 0$ such that $B(\bar{x},\eps) \subseteq \Rn\setminus C \implies B(\bar{x},\eps) \cap C = \emptyset$, but $x_k \to \bar{x}$, so, for this $\eps$, there must be an $N > 0$ such that $x_k \in B(\bar{x},\eps)$ for $k > N$, which is in contraddiction with the fact that the sequence takes values in $C$.
+
+    \paragraph{''$\impliedby$'':} let $C$ be a set. Consider $\set{x_k}_{k \in \N}\subseteq C$ such that $x_k \to \bar{x} \in C$. Assume, by contraddiction, $C$ not closed. Then, for every $\eps > 0$, there exists $z \in \Rn \setminus C$ such that $B(z,\eps) \cap (\Rn \setminus C) = \emptyset$ and $B(z,\eps) \cap C \neq \emptyset$. So we can find a sequence $\set{x_k}_{k \in \N}$ with values in $C$ such that $x_k \to z$ by fixing a sequence $\set{\eps_k}_{k \in \N}$ such that $\eps_k \searrow 0$, so $x_k \in B(z,\eps_k) \cap C$, $x_k \to z$, so, by assumption $z \in C$, which is in contraddiction with $z \in \Rn \setminus C$.
+
+\end{proof}
+
+\begin{definition}[Bounded/finite set]
+
+    A set $A \subseteq \Rn$ is \emph{bounded} if there exists $R > 0$ such that $A \subseteq B(0,R)$.    
+
+    The set $A$ is \emph{finite} if $A = \set{x_1,\dots,x_m} \subseteq \Rn$.
+
+\end{definition}
+
+\begin{definition}[Continuity]
+
+    Let $f : E \subseteq \Rn \to \R^m$, $\bar{x} \in E$. We say that $f$ is \emph{continous} in $\bar{x}$ if for every sequence $\set{x_k}_{k \in \N}$ such that $x_k \to \bar{x}$ in $\Rn$, then $f(x_k) \to f(\bar{x})$ in $\R^m$.
+    
+\end{definition}
+
+\begin{definition}[Cluster/isolated point]
+
+    Let $E \subseteq \Rn$, $\bar{x} \in \Rn$. We say that $\bar{x}$ is a \emph{cluser point} for $E$ if there exists a sequence $\set{x_k}_{k \in \N}$ such that, for every $\bar{x} \neq x_k \to \bar{x}$. We denote tha set of all cluster points with $\mathrm{Acc}(E)$.
+
+    A point $\bar{x}$ is \emph{isolated} in $E$ if $x \in E \setminus \mathrm{Acc}(E)$.
+    
+\end{definition}
+
+\begin{definition}[Limit]
+
+    Let $f : E \subseteq \Rn \to \R^m$, $\bar{x} \in \mathrm{Acc}(E)$. Fixed $\ell \in \R^m$, we say that 
+
+    \[ \lim_{x \to \bar{x}} f(x) = \ell \]
+
+    if for every sequence $\set{x_k}_{k \in \N}$, $x_k \to \bar{x}$, $x_k \neq \bar{x}$ for every $k$, we have $f(x_k) \to \ell$. Notice that we allow $\bar{x}$ to not necessarely be in $E$.
+    
+\end{definition}
+
+\begin{example}
+    
+    Consider the function $f : \set{0} \cup [1,2] \subset \R \to \R$, $x \mapsto x$. Then it has no meaning to speak about $\lim_{x \to 0} f(x)$, as $0 \notin \mathrm{Acc}(\set{0} \cup [1,2])$, while $f$ is continous at $0$, since the only sequence converging to 0 in $\set{0} \cup [1,2]$ is the sequence which is identically 0.
+
+\end{example}
+
+\begin{remark}
+    
+    If $f : \Rn \to \R$ is continous, then:
+    
+    \begin{itemize}
+        \item $\set{x : f(x) < c}$ is \emph{open} $\forall c \in \R$;
+        \item $\set{x : f(x) \le c}$ is \emph{closed} $\forall c \in \R$;
+        \item $\set{x : f(x) = c}$ is \emph{closed} $\forall c \in \R$.
+    \end{itemize}
+
+\end{remark}
+
