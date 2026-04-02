@@ -1,3 +1,4 @@
+quando entri fai git pull
 quando hai finito di scrivere fai command+j e si apre il terminale
 una volta aperto il terminale, digita i seguenti comandi:
 git add .
