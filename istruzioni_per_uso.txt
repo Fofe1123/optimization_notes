@@ -1,0 +1,5 @@
+quando hai finito di scrivere fai command+j e si apre il terminale
+una volta aperto il terminale, digita i seguenti comandi:
+git add .
+git commit -m "messaggio che vuoi" (e.g. "aggiunta la terza lezione ma da finire")
+git push
