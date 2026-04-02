@@ -1,0 +1,29 @@
+\begin{example}
+
+    hyperplane $\{ x \in \Rn | \alpha^\top x = b \} a \in \Rn, b \in \R$ 
+    halfspaces $\{x \in \Rn| \alpha^\top x \leq b\}$
+\end{example}
+\begin{figure}[ht!]
+
+    \centering
+    
+ \begin{tikzpicture}
+    \begin{axis}[
+        axis lines=middle,
+        xlabel={$x$},
+        ylabel={$y$},
+        xmin=-5.5, xmax=5.5,
+        ymin=-5.5, ymax=5.5,
+        grid=major,
+        unit vector ratio=1 1,
+        ticks=none
+      ]
+      \addplot [green, thick, dashed, samples=2] {-x} node [pos=0.1, above] {$y > -x$};
+      \addplot [gray!20, draw=none, domain=-5:5, samples=100] {-x+0.1} \closedcycle;
+      \addplot [gray!20, draw=none, domain=-5:5, samples=100] {-x} \closedcycle;
+      \addplot [gray!20, draw=none, domain=-5:5, samples=100] {-x-0.1} \closedcycle;
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Ball of radius $r$ centered in $x$ on $\R^2$.}
+
+\end{figure}

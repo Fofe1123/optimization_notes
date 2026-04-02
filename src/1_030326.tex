@@ -30,30 +30,23 @@ We will give a quick summary on basic notions of topology, calculus 1 \& 2.
 
     \centering
     
-    \begin{tikzpicture}[scale=1.5, >=stealth]
-        % Assi coordinati (opzionali, giusto per contesto)
-        \draw[->] (-1,0) -- (3,0) node[right] {\tiny $x$};
-        \draw[->] (0,-1) -- (0,2) node[above] {\tiny $y$};
-
-        % Definizione delle variabili per raggio e centro
-        \def\r{0.8}
-        \def\cx{1.5}
-        \def\cy{0.8}
-
-        % La palla aperta
-        % fill: colore interno (trasparente con opacity)
-        % draw: bordo tratteggiato (dashed) per indicare che è aperta
-        \draw[blue, dashed, fill=blue!10] (\cx, \cy) circle (\r);
-
-        % Il centro x
-        \filldraw (\cx, \cy) circle (1pt) node[below left] {$x$};
-
-        % Il raggio r
-        \draw[->] (\cx, \cy) -- ++(30:\r) node[midway, above] {$r$};
-        
-        % Etichetta della palla
-        \node[blue] at (\cx + \r, \cy + \r) {$B_r(x)$};
-    \end{tikzpicture}
+     \begin{tikzpicture}
+    \begin{axis}[
+        axis lines=middle,
+        xlabel={$x$},
+        ylabel={$y$},
+        xmin=-5.5, xmax=5.5,
+        ymin=-5.5, ymax=5.5,
+        grid=major,
+        unit vector ratio=1 1,
+        ticks=none
+      ]
+      \addplot [green, thick, dashed, samples=2] {-x} node [pos=0.1, above] {$y > -x$};
+      \addplot [gray!20, draw=none, domain=-5:5, samples=100] {-x+0.1} \closedcycle;
+      \addplot [gray!20, draw=none, domain=-5:5, samples=100] {-x} \closedcycle;
+      \addplot [gray!20, draw=none, domain=-5:5, samples=100] {-x-0.1} \closedcycle;
+    \end{axis}
+  \end{tikzpicture}
 
     \caption{Ball of radius $r$ centered in $x$ on $\R^2$.}
 
