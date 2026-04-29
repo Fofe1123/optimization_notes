@@ -22,10 +22,10 @@
         unit vector ratio=1 1,
         ticks=none
       ]
-      \addplot [green, thick, dashed, samples=2] {-x} node [pos=0.1, above] {$y > -x$};
-      \addplot [gray!20, draw=none, domain=-5:5, samples=100] {-x+0.1} \closedcycle;
-      \addplot [gray!20, draw=none, domain=-5:5, samples=100] {-x} \closedcycle;
-      \addplot [gray!20, draw=none, domain=-5:5, samples=100] {-x-0.1} \closedcycle;
+      \addplot [green, thick, dashed, samples=2] {x-0.1} node [pos=0.1, above] {$y < x - 0.1$};
+      \addplot [gray!20, draw=none, domain=-5:5, samples=100] {x-0.1} \closedcycle;
+      \addplot [gray!20, draw=none, domain=-5:5, samples=100] {x} \closedcycle;
+      \addplot [gray!20, draw=none, domain=-5:5, samples=100] {x-0.1} \closedcycle;
     \end{axis}
   \end{tikzpicture}
   \caption{halfspace on $\R^2$.}
