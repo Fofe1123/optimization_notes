@@ -1,3 +1,4 @@
+\chapter{Lecture of 04/03/2026}
 \begin{example}
 
     hyperplane $\{ x \in \Rn | \alpha^\top x = b \} a \in \Rn, b \in \R$ 
@@ -30,9 +31,118 @@
   \caption{halfspace on $\R^2$.}
 
 \end{figure}
+
 Polyedra $\{x \in \mathbb{R}^n | a_i^\top x \leq b_i \}$ with $a_1, \ldots, a_m \in \mathbb{R}^n, b_1, \ldots, b_m \in \mathbb{R}^n$
 
-%immagine
+\begin{figure}[ht!]
 
+    \centering
+    
+ \begin{tikzpicture}
+    \begin{axis}[
+        axis lines=middle,
+        xlabel={$x$},
+        ylabel={$y$},
+        xmin=-5.5, xmax=5.5,
+        ymin=-5.5, ymax=5.5,
+        grid=major,
+        unit vector ratio=1 1,
+        ticks=none
+      ]
+      \addplot [green, thick, dashed, samples=2] {-x} node [pos=0.1, above] {$y > -x$};
+      \addplot [gray!20, draw=none, domain=-5:5, samples=100] {-x+0.1} \closedcycle;
+      \addplot [gray!20, draw=none, domain=-5:5, samples=100] {-x} \closedcycle;
+      \addplot [gray!20, draw=none, domain=-5:5, samples=100] {-x-0.1} \closedcycle;
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Polyedra on $\R^2$.}
 
+\end{figure}
+
+C $\subset \Rn$ cone if $\lambda x \in C$ for every $x \in C$ and $\lambda > 0$.
+\begin{figure}[ht!]
+
+    \centering
+    
+ \begin{tikzpicture}
+    \begin{axis}[
+        axis lines=middle,
+        xlabel={$x$},
+        ylabel={$y$},
+        xmin=-5.5, xmax=5.5,
+        ymin=-5.5, ymax=5.5,
+        grid=major,
+        unit vector ratio=1 1,
+        ticks=none
+      ]
+      \addplot [green, thick, dashed, samples=2] {-x} node [pos=0.1, above] {$y > -x$};
+      \addplot [gray!20, draw=none, domain=-5:5, samples=100] {-x+0.1} \closedcycle;
+      \addplot [gray!20, draw=none, domain=-5:5, samples=100] {-x} \closedcycle;
+      \addplot [gray!20, draw=none, domain=-5:5, samples=100] {-x-0.1} \closedcycle;
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Open cone.}
+
+\end{figure}
+\begin{figure}[ht!]
+
+    \centering
+    
+ \begin{tikzpicture}
+    \begin{axis}[
+        axis lines=middle,
+        xlabel={$x$},
+        ylabel={$y$},
+        xmin=-5.5, xmax=5.5,
+        ymin=-5.5, ymax=5.5,
+        grid=major,
+        unit vector ratio=1 1,
+        ticks=none
+      ]
+      \addplot [green, thick, dashed, samples=2] {-x} node [pos=0.1, above] {$y > -x$};
+      \addplot [gray!20, draw=none, domain=-5:5, samples=100] {-x+0.1} \closedcycle;
+      \addplot [gray!20, draw=none, domain=-5:5, samples=100] {-x} \closedcycle;
+      \addplot [gray!20, draw=none, domain=-5:5, samples=100] {-x-0.1} \closedcycle;
+    \end{axis}
+  \end{tikzpicture}
+  \caption{This set is not convex since the line segment connecting two points in the set is not entirely contained in the set.}
+
+\end{figure}
+\begin{definition}[Convex function]
+    A function $f: \Rn \to \R$ is convex if its domain is a convex set and for all $x, y$ in the domain and all $\theta \in [0, 1]$,
+    \[
+        f(\theta x + (1 - \theta) y) \leq \theta f(x) + (1 - \theta) f(y).
+    \]
+\end{definition}
+\begin{figure}[ht!]
+
+    \centering
+    
+ \begin{tikzpicture}
+    \begin{axis}[
+        axis lines=middle,
+        xlabel={$x$},
+        ylabel={$y$},
+        xmin=-5.5, xmax=5.5,
+        ymin=-5.5, ymax=5.5,
+        grid=major,
+        unit vector ratio=1 1,
+        ticks=none
+      ]
+      \addplot [green, thick, dashed, samples=2] {-x} node [pos=0.1, above] {$y > -x$};
+      \addplot [gray!20, draw=none, domain=-5:5, samples=100] {-x+0.1} \closedcycle;
+      \addplot [gray!20, draw=none, domain=-5:5, samples=100] {-x} \closedcycle;
+      \addplot [gray!20, draw=none, domain=-5:5, samples=100] {-x-0.1} \closedcycle;
+    \end{axis}
+  \end{tikzpicture}
+  \caption{convex function on $\R^2$.}
+
+\end{figure}
+
+f is said to be \textbf{Concave} if $-f$ is convex.
+\begin{example}
+    f(x) = a^\
+\end{example}
+
+\end{chapter}
 
