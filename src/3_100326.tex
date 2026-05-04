@@ -1,4 +1,5 @@
 \chapter{Lecture of 04/03/2026}
+
 \begin{example}
 
     hyperplane $\{ x \in \Rn | \alpha^\top x = b \} a \in \Rn, b \in \R$ 
@@ -7,69 +8,7 @@
     
 \end{example}
 
-\begin{figure}[ht!]
-
-    \centering
-    
-    \documentclass{standalone}
-\usepackage{pgfplots}
-\usepgfplotslibrary{fillbetween}
-\pgfplotsset{compat=1.18}
-
-\begin{document}
-\begin{tikzpicture}
-    \begin{axis}[
-        axis lines = middle,
-        xlabel = {$x$}, ylabel = {$y$},
-        xmin = -3, xmax = 6, ymin = -5, ymax = 5,
-        grid = both,
-        unit vector ratio={1 1}
-    ]
-        % Definiamo la retta come frontiera
-        \addplot [name path=A, color=green, line width=1.5pt, domain=-2:5] {x - 2};
-        
-        % Definiamo il limite inferiore del grafico per il riempimento
-        \path [name path=B] (axis cs:-3,-5) -- (axis cs:6,-5);
-
-        % Coloriamo l'iperpiano sottostante (il semipiano y <= x - 2)
-        \addplot [violet!20] fill between [of=A and B];
-        
-        % Aggiungiamo i tratteggi manuali per simulare il disegno a penna
-        \foreach \i in {-1,0,1,2,3,4,5} {
-            \draw [violet, thin] (axis cs:\i, \i-2) -- (axis cs:\i+1, \i-4);
-        }
-    \end{axis}
-\end{tikzpicture}
-\end{document}
-  
-\end{figure}
-
 Polyedra $\{x \in \mathbb{R}^n | a_i^\top x \leq b_i \}$ with $a_1, \ldots, a_m \in \mathbb{R}^n, b_1, \ldots, b_m \in \mathbb{R}^n$
-
-\begin{figure}[ht!]
-
-    \centering
-    
- \begin{tikzpicture}
-    \begin{axis}[
-        axis lines=middle,
-        xlabel={$x$},
-        ylabel={$y$},
-        xmin=-5.5, xmax=5.5,
-        ymin=-5.5, ymax=5.5,
-        grid=major,
-        unit vector ratio=1 1,
-        ticks=none
-      ]
-      \addplot [green, thick, dashed, samples=2] {-x} node [pos=0.1, above] {$y > -x$};
-      \addplot [gray!20, draw=none, domain=-5:5, samples=100] {-x+0.1} \closedcycle;
-      \addplot [gray!20, draw=none, domain=-5:5, samples=100] {-x} \closedcycle;
-      \addplot [gray!20, draw=none, domain=-5:5, samples=100] {-x-0.1} \closedcycle;
-    \end{axis}
-  \end{tikzpicture}
-  \caption{Polyedra on $\R^2$.}
-
-\end{figure}
 
 C $\subset \Rn$ cone if $\lambda x \in C$ for every $x \in C$ and $\lambda > 0$.
 \begin{figure}[ht!]
@@ -151,10 +90,68 @@ C $\subset \Rn$ cone if $\lambda x \in C$ for every $x \in C$ and $\lambda > 0$.
 
 \end{figure}
 
-f is said to be \textbf{Concave} if $-f$ is convex.
+f is said to be \textbf{concave} if $-f$ is convex.
+
 \begin{example}
-    f(x) = a^\
+
+    \[f(x) = a^{\top}x + b \phantom{suca} a \in \Rn, b \in \R \]
+    \[f(\gamma x +(1-\gamma)y) = \<a, \gamma x + (1 - \gamma)y \> + b(1 - \gamma + \gamma)\]
+    \[  (\langle a, x \rangle + b) +(1- \gamma)(\langle a, y \rangle + b)\]
+    \[ \gamma f(x) + (1-\gamma)f(y)\]
+
 \end{example}
 
-\end{chapter}
+Let's see another example:
+
+\begin{example}
+
+    \[f(x) = ||x||\]
+    \[f(ax + (1-a)y) = || ax +(1-a)y|| = a ||x|| +(1-a) ||y|| = a f(x) + (1-a)f(y)\]
+
+\end{example}
+
+So, we proved $|| ||$ is convex.
+
+\begin{itemize}
+
+    \item if f is \textbf{convex} $\implies$ $V_{\gamma} = \{x | f(x)\leq \gamma\}$ \textbf{convex}, $\forall \gamma \in \R$
+    \[x,y \in V_{\gamma}, f(x) \leq \gamma, f(y) \leq \gamma \] 
+    ask $\alpha x +(1- \alpha)y \in V_{\gamma}$?
+    \[f(\alpha x +(1-\alpha)y) \leq \alpha f(x) +(1-\alpha)f(y) \leq \alpha \gamma +(1-\alpha)\gamma = \gamma\]
+    \[\implies f(\alpha x + (1-\alpha)y) \in V_{\gamma} \]
+    So we proved convexity of $V_{\gamma}$
+
+    \item If f has convex level sets, it doesn't imply that f is convex!
+     \newline Take, for example, the function $f(x) = \sqrt{\abs{x}}$
+    \[V_{\gamma} = \{x | \sqrt{\abs{x}} \leq \gamma, \abs{x} \leq \gamma^2\} = [-\gamma ^2, \gamma ^2]\]
+
+\end{itemize}
+
+Limitation of convex functions:
+
+\begin{itemize}
+
+    \item If f is defined on a convex set, it doesn't mean it is \text{convex}!
+    \item sup f ... i have this hole in my notes, please Alessio the Great fill it.
+    
+\end{itemize}
+
+\begin{definition}[Epigraph]
+
+    Let $f: X \subseteqq \Rn \longrightarrow \R \cup \{\infty\}$
+    \[epi(f) = \{ (x,w) \in \R^{n+1} | x \in X , \omega \in \R, f(x) \leq \omega\} \subseteqq \R^{n+1}\]
+
+\end{definition}
+
+\begin{definition}[Effective Domain]
+
+    \[f: X \subseteqq \Rn \longrightarrow \bar{\R}\]
+    \[don(f) = \{ x \in X | f(x) < + \infty\} = \{\}\]
+
+\end{definition}
+
+
+
+
+
 
