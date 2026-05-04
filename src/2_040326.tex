@@ -1,4 +1,4 @@
-\chapter{Lecture of 04/03/2026}
+\chapter{Lecture 2 of 04/03/2026}
 
 Our main focus from now on is to solve the problem 
 
@@ -83,4 +83,67 @@ for some $A \subseteq \Rn$ and some $f : \Rn \to \R$. We will restrict ourselfs 
     
 \end{theorem}
 
+\begin{proof}
+    
+    We prove the statement for the minimum point. 
+
+    Let $\ell = \displaystyle\inf_{x \in A} f(x)$. We can always find a sequence $\set{x_n}_n \subseteq A$ such that $f(x_n) \to \ell$ by the continuity of $f$. Since $A$ is bounded, $\set{x_n}_n$ is bounded as well. By Bolzano-Weierstrass, there exists a subsequence $\set{x_{n_k}}_k$ converging to $\bar{x} \in A$ by closerness of $A$. By continuity, in particular $f$ is continous at $\bar{x}$, 
+
+\end{proof}
+
+\begin{remark}
+    
+    For $f : \Rn \to \R$, we define the \emph{gradient} of $f$ as 
+
+    \[ \nabla f(c) = \left( \frac{\partial f}{\partial x_1}(c), \dots, \frac{\partial f}{\partial x_n}(c) \right) \]
+
+    the vector of partial derivatives, defined as
+
+    \[ \frac{\partial f}{\partial x_i}(c) = \lim_{h \to 0} \frac{f(c + he_i) - f(c)}{h} \]
+
+    whenever this limit exists finite, and where $e_i$ is the $i$-th vector of the canonical base of $\Rn$. Furthermore, we say that $f$ is \emph{differentiable}   at $c$ if
+
+    \[ f(x) = f(c) + \langle \nabla f(c), x - c \rangle + \mathcal{O}(\norm{x - c}^2) \]
+
+    for $x \to c$.
+
+\end{remark}
+
+We now set ouf focus on convex analysis.
+
+\begin{definition}[Convex set]
+
+    Let $C \subseteq \Rn$. We say that $C$ is \emph{convex} if, for any $x,y \in C$, and for any $\alpha \in [0,1]$, $\alpha x + (1-\alpha)y \in C$.
+    
+\end{definition}
+
+\begin{proposition}
+    
+    \begin{enumerate}
+        \item[a)] $\displaystyle\bigcap_{i \in I} C_i$ is convex if $C_i$ is convex for any $i \in I$ finite or countable;
+        \item[b)] the \emph{algebraic sum} $C_1 + C_2 = \set{x + y : x \in C_1,\, y \in C_2}$ is convex if $C_1$ and $C_2$ are convex;
+        \item[c)] the set $\lambda C = \set{\lambda x : x \in C}$ is convex if $C$ is convex for any $\lambda \in \R$;
+        \item[d)] $\overline{C},C^\circ$ are convex if $C$ is convex;
+        \item[e)] if a function $f : C \to \R$ is affine, then the set $f(C) = \set{y : y = f(x), \, x \in C}$ is convex if $C$ is convex.
+    \end{enumerate}
+
+\end{proposition}
+
+\begin{proof}
+    
+    We prove all the propositions separately.
+
+    \paragraph{\underline{a)}:} suppose $C_i$ convex and let $C = \displaystyle\bigcap_{i \in I} C_i$. Let $x,y \in C$, $\alpha \in [0,1]$. Since $x,y \in C$, in particular $x,y \in C_i$ for all $i \in I$. But then also $\alpha x + (1-\alpha)y \in C_i$ for all $i \in I$, hence $C$ is convex.
+
+    \paragraph{\underline{b)}:} let $x = x_1 + x_2 \in C_1 + C_2$, $x_1 \in C_1$ and $x_2 \in C_2$, take $y \in C_1 + C_2$ of the same form. 
+    
+    \[ \alpha x + (1-\alpha y) = \underbrace{\alpha x_1 + (1-\alpha)y_1}_{\in C_1} + \underbrace{\alpha x_2 + (1-\alpha)y_2}_{\in C_2} \in C. \]
+
+    \paragraph{\underline{c)}:} trivial.
+
+    \paragraph{\underline{d)}:} consider $\set{x_k}_k \subseteq C$ and $\set{y_k}_k \subseteq C$ such that $x_k \to x$ and $y_k \to y$. Then the sequence $\set{\alpha x_k + (1-\alpha)y_k}_k \subseteq C$. But then also $\alpha x + (1-\alpha)y \in C$ as limit of sequences valued in $C$. 
+
+    Let now $x,y \in C^\circ$. Then there exists $r > 0$ such that $B(x,r) \subseteq C$ and $B(y,r) \subseteq C$. Consider $\alpha x + (1-\alpha)y$ . Our claim is: $B(\alpha x + (1-\alpha)y, r) \subseteq C$. Indeed, any $z \in B(\alpha x + (1-\alpha)y,r)$ is of the form $z = \alpha x + (1-\alpha)y + w$ with $\norm{w} < r$, so $\alpha (x+w) + (1-\alpha)(y+w) \in C$ by convexity of $C$, hence the claim.
+
+\end{proof}
 
