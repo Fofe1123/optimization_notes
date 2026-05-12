@@ -1,0 +1,196 @@
+\chapter{Lecture 3 of 10/03/2026}
+
+\begin{example}[Convex sets]
+
+    The following sets are convex in $\Rn$:
+
+    \begin{itemize}
+        \item \textbf{hyperplanes}: $\set{x \in \Rn : a^\top x = b}$ for $a \in \Rn$, $b \in \R$;
+        \item \textbf{halfspaces}: $\set{x \in \Rn : a^\top x \le b}$ for $a \in \Rn$, $b \in \R$;
+        \item \textbf{polyhedra}: $\set{x \in \Rn : a_i^\top x \le b_i}$ for $a_i \in \Rn$, $b_i \in \R$ for $i = 1,\dots, m$ (they are intersecttion of half spaces).
+    \end{itemize}
+
+    Half cones are convex as well.
+    
+\end{example}
+
+\begin{definition}[Convex/concave function]
+    
+    Let $C \seq \Rn$ be convex. Consider $f : C \to \R$. We say that $f$ is \emph{convex} if the following holds:
+
+    \[ f(\cc) \le \alpha f(x) + (1-\alpha)f(y) \quad \forall x,y \in C, \, \forall \alpha \in [0,1].\]
+
+    We say that $f$ is \emph{concave} if $-f$ is convex.
+
+\end{definition}
+
+\begin{example}
+    
+    Affine functions are convex. Indeed, let $f(x) = a^\top x + b$, $a \in \Rn$. 
+
+    Indeed,
+
+    \begin{align*}
+        f(\alpha x + (1-\alpha)y) &= \langle a, \alpha x + (1-\alpha)y \rangle + b(1 - \alpha + \alpha) \\
+        &= \alpha \langle a, x \rangle + \alpha b + (1-\alpha) \langle a,y\rangle + (1-\alpha)b \\ 
+        &= \alpha f(x) + (1-\alpha)f(y).
+    \end{align*}
+
+\end{example}
+
+\begin{example}
+    
+    The norm in $\Rn$ is convex, as an easy consequence of triangular inequality.
+
+\end{example}
+
+We can observe that $f$ convex implies that the set $V_\gamma = \set{x \in \Rn : f(x) \le \gamma}$ is convex for all $\gamma \in \R$. Indeed, for every $x,y \in V_\gamma$ we have $f(x)\le \gamma$ and $f(y) \le \gamma$. We see that $f(\cc) \in V-\gamma$. Indeed, by convexity of $f$ we have $f(\cc) \le \alpha f(x) + (1-\alpha)f(y) = \alpha\gamma + (1-\alpha)\gamma = \gamma$. 
+
+In general, the converse is not true, i.e. convex level sets \emph{does not imply} $f$ convex.
+
+From now on, $f : \Rn \to \Rb$, where $\Rb = \R \cup \set{+\infty, -\infty}$. 
+
+\begin{definition}[Epigraph]
+    
+    Let $f : \Rn \to \Rb$. We define the set 
+
+    \[ \epi{f} = \set{(x,w) \in \Rnp : x \in X, \, w \in \R, \, f(x) \le w}. \]
+
+    An intuitive definition could be ''\emph{the set of points above the graph of} $f$''.
+
+\end{definition}
+
+\begin{definition}[Effective domain]
+    
+    Given $f : X \seq \Rn \to \Rb$ we define the \emph{effective domain} of $f$ as the set 
+
+    \[ \dom{f} = \set{x \in X : f(x) < +\infty} = \set{x \in X : \exists\, w \in \R \text{ s.t. } (x,w) \in \epi{f}}. \]
+
+\end{definition}
+
+\begin{definition}[Proper function]
+
+    A function $f : X \seq \Rn \to \Rb$ is said \emph{proper} if $f(x) < +\infty$ and $f(x) > -\infty$ for all $x \in X$. In other words, $\epi{f}$ does not contain any vertical line.
+    
+\end{definition}
+
+\begin{definition}[Extension of convex functions]
+
+    Let $C \seq \Rn$ be a convex set. A funciton $f : C \to \Rb$ is \emph{convex} if $\epi{f}$ is convex in $\Rnp$.
+    
+\end{definition}
+
+\begin{remark}
+    
+    If $f: C \to \R$ the definitions coincides.
+
+\end{remark}
+
+\begin{proof}
+    
+    Assume $\epi{f}$ convex in $\Rnp$, then the points $(x,f(x)), \, (y,f(y)) \in \epi{f}$, but also $\alpha(x,f(x)) + (1-\alpha)(y,f(y)) \in \epi{f}$. This implies $(\alpha x + (1-\alpha)y, \alpha f(x) + (1-\alpha)f(y)) \in \epi{f} \implies f(\alpha x + (1-\alpha)y) \le \alpha f(x) + (1-\alpha)f(y)$.
+
+\end{proof}
+
+\begin{definition}[Convex indicator function]
+
+    Given $A \seq \Rn$, we define the \emph{convex indicator function} of the set $A$ as 
+
+    \[ \delta_A(x) = \begin{cases}
+        0 \quad \text{if } x \in A \\
+        +\infty \quad \text{otherwise}
+    \end{cases} \]
+
+    This is coherent with the infimum operation, as 
+
+    \[ \inf_{x \in A} f(x) = \inf_{x \in \Rn} f(x) + \delta_A(x). \]
+
+\end{definition}
+
+\begin{definition}[Liminf]
+    
+    Let $f : x \seq \Rn\to \R$, $c \in \mathrm{Acc}(X)$. We say that 
+    
+    \[ \ell = \liminf_{x \to c} f(x) \]
+
+    if $\ell = \inf_{x_k} \lim_{k \to +\infty} f(x_k)$ where $\set{x_k}_k$ is a sequence in $X$, $\set{x_k}_k \to c$, $x_k \neq c$ for all $k$ and $\lim_{k \to \infty} f(x_k)$ exists finite.
+
+\end{definition}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{img/liminf.png}
+    \caption{The liminf of $f$ at $x=1$ is $1$, even if $f(1) = 0.5$.}
+\end{figure}
+
+\begin{definition}[Lower semicontinuity]
+
+    Let $f : X \seq \Rn \to \R$. We say that $f$ is \emph{lower semicontinuous} (lsc for short) at $c \in X$ if 
+
+    \[ f(c) \le \liminf_{x \to c} f(x). \]
+    
+\end{definition}
+
+\begin{theorem}[Weierstrass]
+    
+    The Weierstrass theorem still allows a minimum point for a lsc funciton.
+
+\end{theorem}
+
+\begin{proposition}
+    
+    Let $f : \Rn \to \Rb$. The following are equivalent: 
+
+    \begin{enumerate}
+        \item[$i)$] The level sets $V_\gamma = \set{x \in \Rn : f(x) \le \gamma}$ are closed for all $\gamma \in \R$;
+        \item[$ii)$] $f$ is lsc;
+        \item[$iii)$] $\epi{f}$ is closed in $\Rnp$.
+    \end{enumerate}
+
+\end{proposition}
+
+\begin{proof}
+    
+    We prove $i) \implies ii) \implies iii) \implies i)$.
+
+    \paragraph{$i) \implies ii)$:} suppose $V_\gamma$ closed for all $\gamma$. Assume by contraddiction $f$ not lsc, so there exists $c \in \Rn$ s.t. $f(c) > \liminf_{x \to c} f(x)$. This implies that there exists a sequence $\set{x_k}_k,\, x_k \to c$ and a $\gamma \in \R$ s.t. $f(c) > \gamma \ge \displaystyle\lim_{k \to +\infty} \inf f(x_k)$. For $k$ big enough , we have $f(x_k) \le \gamma$, so $x_k \in V_\gamma$. By closerness of $V_\gamma$, it must be $c \in V_\gamma \implies f(c) \le \gamma$, which is in contraddiction with $f(c) > \gamma$.
+
+    \paragraph{$ii) \implies iii)$:} assume $f$ lsc, we want to show that any sequence $\set{(x_k,w_k)}_k \subseteq \epi{f}$ converging to $(\bar{x},\bar{w})$ must satisfy $(x,w) \in \epi{f}$. Assime $x_k \to \bar{x},\, w_k \to \bar{w}$. Then $f(x_k) \le w_k$ for all $k$. Since $x_k \to \bar{x}$ and $f$ is lsc, it must be that $f(\bar{x}) \le \displaystyle\liminf_{k \to +\infty} f(x_k) \le \displaystyle\liminf_{k \to +\infty} w_k = \bar{w}$, hence $(\bar{x},\bar{w}) \in \epi{f}$.
+
+    \paragraph{$iii \implies i)$:} assume $\epi{f}$ closed. Let $\gamma \in \R$, $V_\gamma = \set{x : f(x) \le \gamma}$. Consider the sequence $\set{x_k}_k \seq V_\gamma$ s.t $x_k \to \bar{x}$. We want to show $\bar{x} \in V_\gamma$. The points $(x_k,\gamma) \in \epi{f}$ for all $k$, so, by closerness of $\epi{f}$, $(\bar{x},\gamma) \in \epi{f}$. This impies $f(\bar{x}) \le \gamma$, hence $\bar{x} \in V_\gamma$.
+
+\end{proof}
+
+\begin{proposition}
+
+    Let $f : \R^m \to (-\infty,+infty]$, $A \in \R^{m \times n}$, $F : \Rn \to (-\infty,+\infty]$, $x \mapsto f(Ax)$. If $f$ is convex, then $F$ is convex. If $f$ is closed, then $F$ is closed.
+
+\end{proposition}
+
+\begin{proof}
+    
+    Assume $f$ convex. Then 
+
+    \[ F(\alpha x + (1-\alpha)y) = f(\alpha A x + (1-\alpha) A y) \le \alpha f(Ax) + (1-\alpha) f(Ay). \]
+
+    Assume $f$ closed, so $\epi{f}$ is closed and $f$ is lsc. Take a sequence $x_k \to \bar{x}$. Then $\displaystyle\liminf_k F(x_k) = \displaystyle\liminf_k f(Ax_k)$ Let $y_k = Ax_k$, so $y_k \to A\bar{x}$ by continuity of the linear map $Ax$. This implies $\displaystyle\liminf_k f(Ax_k) \ge f(A\bar{x}) = F(\bar{x})$. 
+
+\end{proof}
+
+\begin{proposition}
+
+    Let $\set{f_i}_{i=1}^m$ be a family of convex and closed function s.t. $f_i : \Rn \to (-\infty,+\infty]$, and $\gamma_1, \dots, \gamma_m > 0$. Then the function defined by $F(x) = \sum_{i=1}^m \gamma_i f_i(x)$ is closed and convex. 
+
+\end{proposition}
+
+\begin{proposition}
+    
+    Let $f_i : \Rn \to (-\infty,+\infty]$ for $i \in I$ any countable index set. Let $f(x) = \displaystyle\sup_i f_i(x)$. If $f_i$ is closed convex for all $i \in I$ then $f$ is closed convex.
+
+\end{proposition}
+
+\begin{proof}
+    
+    Let $(x,w) \in \epi{f}$, then $f(x) \le w$, so $f_i(x) \le w$ for all $i$. This implies $(x,w) \in \epi{f_i}$ for all $i$, hence $\epi{f} = \displaystyle\bigcap_{i \in I} \epi{f_i}$, which is convex as countable intersection of convex sets. The same argument holds for closerness. 
+
+\end{proof}
