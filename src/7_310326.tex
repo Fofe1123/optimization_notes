@@ -1,0 +1,90 @@
+\chapter{Lecture 7 of 31/03/2026}
+
+\begin{proposition}
+    
+    Let $C \seq \Rn$ nonempty convex, let $S \seq \Lc{C}$ be a subspace. Then we can decompose $C$ as 
+
+    \[ C = S + (C \cap S^\perp). \]
+
+\end{proposition}
+
+\begin{proof}
+    Not required.
+\end{proof}
+
+\begin{proposition}
+    
+    Let $f : \Rn \to (-\infty,+\infty]$ be closed proper convex funciton. Let $V_\gamma = \set{x \in \Rn : f(x) \le \gamma}$ for all $\gamma \in \R$ (sublevel sets of $f$). Then
+
+    \begin{enumerate}
+        \item[a)] all nonempty $V_\gamma$ have the same recesison cone, denoted by 
+            \[ \Rc{f} = \set{d \in \Rn : (d,0) \in \Rc{\epi{f}}} \]
+        \item[b)] if one $V_\gamma$ is compact, then all the sublevel sets are compact.
+    \end{enumerate}
+
+\end{proposition}
+
+\begin{proof}
+    
+    Fix $\gamma \in \R$, assume $V_\gamma \neq \empty$. Define the $\gamma$-slice $S = \set{(x,\gamma) : f(x) \le \gamma}$. Observe that $S = \epi{f} \cap \set{(x,\gamma) : x \in \Rn}$. We already know $\epi{f}$ closed convex, so 
+    
+    \[ \Rc{S} = \Rc{\epi{f}} \cap \Rc{\set{(x,\gamma) : x \in \Rn}} = \Rc{\epi{f}} \cap \set{(d,0) : d \in \Rn} = \set{(d,0) : d \in \Rc{\epi{f}}} \] 
+    
+    which does not depend on $\gamma$.
+
+    Point b): form a), we know $\Rc{V_{\gamma_1}} = \Rc{V_{\gamma_2}}$ for any $\gamma_1,\gamma_2 \in \R$ such that their sublevel sets are nonempty. If, for $\bar{\gamma} \in \R$, $V_{\bar{\gamma}}$ is compact, then $\Rc{V_{\bar{\gamma}}} = \set{0}$. Then for a) every recession cone is equal, hence $\Rc{V_\gamma} = \set{0}$ for any $\gamma$. This shows that $V_\gamma$ is compact for every $\gamma \in \R$.
+
+\end{proof}
+
+\begin{remark}
+    
+    Let $d \in \Rc{f}$ if $d \in \Rc{V_{\bar{\gamma}}}$ for any $\gamma$. Fix $\gamma \in \R$, then $d \in \Rc{V_\gamma}$ implies that for $x \in V_{\gamma}$, $x + \alpha d \in V_\gamma$ for any $\alpha \geq 0$, hence $f(x + \alpha d) \le \gamma$ for every $\alpha \geq 0$. This shows that on the direction $d$, the function $f$ cannot increase, so $d$ is a direction of continous non-ascent for $f$.
+
+\end{remark}
+
+\begin{definition}[Linearity space of a function]
+
+    The linearity space of a function is defined in the same way as the linearity space of a set.
+    
+\end{definition}
+
+\begin{remark}
+    
+    If $d \in \Lc{f}$, then 
+
+    \begin{align*}
+        f(x + \alpha d) \le f(x) \quad \forall \alpha \ge 0 \\
+        f(x - \alpha d) \le f(x) \quad \forall \alpha \ge 0.
+    \end{align*}
+
+    I claim that $d$ is a constancy direction for $f$. Let $x = \frac12 (x - \alpha d) + \frac12 (x + \alpha d)$. Indeed, assume by contraddiction $f(x - \alpha d) < f(x)$. Then 
+    
+    \begin{align*}
+        f(x) &= f\left(\frac12 (x - \alpha d) + \frac12 (x + \alpha d)\right) \\
+            &\le \frac12 \underbrace{f(x - \alpha d)}_{< f(x)} + \frac12 \underbrace{f(x + \alpha d)}_{\le f(x)} < f(x).
+    \end{align*}
+
+    which is a contraddiction.
+
+    This shows that $f(x + \alpha d) = f(x - \alpha d) = f(x)$ for any $\alpha \ge 0$. The space $\Lc{f}$ is also called \emph{constancy space}.
+
+\end{remark}
+
+\begin{example}
+    
+    Consider $f(x)= x^\top Q x + c^\top x + b$ as before. It is not difficoult to show that 
+
+    \[ \Lc{f} = \set{d : Qd = 0,\, c^\top d = 0}. \]
+
+\end{example}
+
+\section{Recession function}
+
+Consider $f : \Rn \to (-\infty,+\infty]$ closed proper convex. This implies $\epi{f}$ is closed convex subset of $\Rnp$. Consider $\Rc{\epi{f}} \seq \Rnp$. Question: is that set the epigraph of something? The answer is yes, for every $x$, the quantity $\inf_w \set{(d,w) : d \in \Rc{\epi{f}}}$ is finite or $+\infty$. Since $(d,w) \in \Rc{\epi{f}}$ then $(d,f(x)) + \alpha (d,w) \in \epi{f}$, hence $(x + \alpha d, f(x) + \alpha w) \in \epi{f} \implies f(x+\alpha d) \le f(x) + \alpha w$. Assume $w$ can be taken as negative as we want, so $f(x + d) = -\infty$, but this is not possible. This implies that $\Rc{\epi{f}}$ can be the epigraph of some function.
+
+\begin{definition}[Recession function]
+
+    We define $\rf{f}$ the recession function of $f$ as the function such that $\epi{\rf{f}} = \Rc{\epi{f}}$.
+
+\end{definition}
+
