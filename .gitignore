@@ -1,1 +1,2 @@
-tabNotes.pdf
+*.pdf
+!OPT_notes_main.pdf

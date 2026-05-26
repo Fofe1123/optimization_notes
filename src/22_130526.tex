@@ -1,0 +1,35 @@
+\chapter{Lecture \thechapter{} of 13/05/2026}
+
+Do we have convergence? Just a few words: if we choose $\theta = 1$, set $L = \norm{A}$ ans it holds that $\tau \sigma L^2 < 1$, then $(x^k,y^k) \to (x^*,y^*)$ as $C/N$ (order 1 convergence). The proof is quite long and not very interesting.
+
+\begin{example}[ROF model, image denoising]
+
+    We can consider an image (black and white) as a map $g : \Omega \to [0,1]$. Imagine that in the acquisition process for $g$ an arbitrary amount of noise is added. We can recover the ''true'' image as the minimizer of the functional 
+
+    \[ \frac{\lambda}{2} \int_\Omega \abs{u - g}^2 \, \dd x + \int_\Omega \abs{Du} \]
+
+    where $\abs{Du}$ denotes the total variation measure. In general we seek for a minimizer $u \in \mathrm{BV}(\Omega)$, but, if $u \in W^{1,1}(\Omega)$, then $\abs{Du} = \norm{\nabla u}\dd x$
+
+    We consider first the function $u$ to be a $W^{1,1}$ function, then, WLOG, $\Omega = [0,1] \times [0,1]$. We discretize $\Omega$ with a uniform grid in each dimension, so that $\Omega \approx (x_i,y_j)_{ij} = (ih,jh)_{ij}$ where $h$ is the discretization step. Then we define the function on the grid as a matrix of samples $u = \set{u_{ij}}_{ij}$ and the noisy function $g = \set{g_{ij}}_{ij}$. The problem then becomes 
+
+    \[ \frac{\lambda}{2} \sum_{ij} h^2 \abs{u_{ij} - g_{ij}} + \sum_{ij} h^2 \norm{(\nabla u)_{ij}}. \]
+
+    Let $X = \R^{M \times N}$, $Y = \left(\R^{M \times N}, \R^{M \times N}\right)$, $p \in Y \implies p = (p^1,p^2)$, and define the map $A : X \to Y$, where $Au = (\nabla u)_{ij}$ with foreward finite differences, so 
+
+    \[ (\nabla u)_{ij}^1 = \begin{cases}
+        \displaystyle\frac{u_{i+1,j} - u_{ij}}{h} \quad \text{if } i < M \\
+        \\ 
+        0 \quad\text{otherwise, Neumann BC}
+    \end{cases}
+    \]
+
+    and 
+
+    \[ (\nabla u)_{ij}^2 = \begin{cases}
+        \displaystyle\frac{u_{i,j+1} - u_{i,j}}{h} \quad \text{if } j < N \\
+        \\ 
+        0 \quad\text{otherwise, Neumann BC}
+    \end{cases}
+    \]
+
+\end{example}

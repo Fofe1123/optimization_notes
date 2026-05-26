@@ -1,0 +1,219 @@
+\chapter{Lecture \thechapter{} of 21/04/2026}
+
+\section{Minmax problems}
+
+Let $X,Y \seq \Rn$, $L : X \times Y \to \Rb$. Define
+
+\begin{align*}
+    f(x) &= \sup_y L(x,y) \\
+    g(y) &= \inf_x L(x,y).
+\end{align*}
+
+So $f : X \to \R$, $g : Y \to \R$. We are intrested in $\inf_x f(x)$ and $\sup_y g(y)$. How do they relate?
+
+\begin{remark}
+    
+    By definition, $g(y) \le L(x,y) \le f(x)$ for anu $x \in X$ and $y \in Y$. In particular, $g(y) \le f(x)$. Thake the $\inf_x\sup_y$ on both sides, so 
+
+    \[ \sup_y g(y) \le \inf_x f(x). \]
+
+    We get then $\sup_y \inf_x L(x,y) \le \inf_x \sup_y L(x,y)$.
+
+\end{remark}
+
+\begin{definition}[Saddle value]
+    
+    If $\sup_y \inf_x L(x,y) = \inf_x \sup_y L(x,y)$ we name this value \emph{saddle value} of $L$.
+
+\end{definition}
+
+\begin{definition}[Saddle point]
+    
+    A point $(\bar{x},\bar{y})$ is a \emph{saddle point} of $L$ if
+
+    \[ L(\bar{x},y) \le L(\bar{x},\bar{y}) \le L(x,\bar{y}) \]
+
+    for any $x,y$.
+
+\end{definition}
+
+\begin{theorem}
+    
+    A pair $(\bar{x},\bar{y})$ is a saddle point if and only if $\bar{x}$ solves $\inf_x f(x)$, $\bar{y}$ solves $\sup_y g(y)$ and the saddle value exists, i.e. $\inf_x f(x) = \sup_y g(y)$.
+
+\end{theorem}
+
+\begin{proof}
+    
+    \underline{\textbf{''$\implies$''}}: suppose $(\bar{x},\bar{y})$ saddle point. Then $L(\bar{x},y) \le L(\bar{x},\bar{y}) \le L(x,\bar{y})$ for any $x,y$. This implies 
+
+    \[ \sup_y L(\bar{x},y) \le L(\bar{x},\bar{y}) \le \inf_x L(x,\bar{y}), \]
+
+    hence,
+
+    \[ f(\bar{x}) \le L(\bar{x},\bar{y}) \le g(\bar{y}) \le f(\bar{x}) \]
+
+    as $g \le f$, so the inequalites becomes actually equalities.
+
+    The other implication is easy.
+
+\end{proof}
+
+Why are we intrested in this kind of problems? Our focus is $\inf_x f(x)$. Assume, by chance, that such an $L$ exists and be such that $f(x) = \sup_y L(x,y)$. Now, how can we find $Y$ and $L$?
+
+In this setting i can look at $\sup_y g(y)$ as a natural candidate of the ''dual'' problem, and hope that solving the dual is easier. We know for sure $g(y) \le \inf_x f(x)$ for any $y$, hence $g(y)$ is a lower bound on the infimum in the primal problem. 
+
+Assume that exists $\bar{y}$ such that $g(\bar{y}) = \inf_x f(x)$. But also $L(x,\bar{y}) \le f(x)$ for any $x$. So if $\bar{x}$ minimizes $f$, then $\bar{x}$ also minimizes $L(\cdot,\bar{y})$. So we can determine all minimizers of $L(\cdot,\bar{y})$ and search among them a minimizer of $f$. Observe that $g(\bar{y}) \le  \sup_y g(y) \le \inf_x f(x) = g(\bar{y})$. Then $\bar{y}$ maximizes $g(y)$, hence $(\bar{x},\bar{y})$ is a saddle point of $L$. But finding $L$ is not easy\dots
+
+But under conveity assumptions, all this process could be implemented easly. Let's focus on the convex case. The idea is to ''embed'' the $\inf_x f(x)$ into a ''bigger'' function $F$, so define $F : X \times U \to \Rb$, where $U$ is a set of perturbations, select $F$ such that $F(x,0) = f(x)$.
+
+\begin{definition}[Optimal value function]
+    
+    The \emph{optimal value function} $\phi : U \to \Rb$ is defined as 
+
+    \[ \phi(u) = \inf_x F(x,u). \]
+
+    Observe that $\phi(0) = \inf_x f(x)$.
+
+\end{definition}
+
+\begin{theorem}[Book 3.3.1(a)]
+    
+    If $F$ is convex (in both entries ath the same time), then $\phi$ is convex.
+
+\end{theorem}
+
+\begin{proof}
+    
+    If $\epi{\phi} = \emptyset$, then $\phi \equiv +\infty$, which is convex. Otherwise, is $\epi{\phi}$ convex? Let $(\bar{u},\bar{v}), (\tilde{u},\tilde{v}) \in \epi{\phi}$. Then 
+
+    \[ \inf_x  F(x,\bar{u}) = \phi(\bar{u}) \le \bar{v} \]
+
+    so there exists a sequence $\set{\bar{x}_k}_k \seq X$ such that $F(\bar{x}_k,\bar{u}) \to \phi(\bar{u})$.  We do the same reasoning for $~$, so there exists a sequence $\set{\tilde{x}_k}_k$ such that $F(\tilde{x}_k,\tilde{u}) \to \phi(\tilde{u})$. Take $\alpha \in (0,1)$, then 
+
+    \[ \phi(\alpha \bar{u} + (1-\alpha) \tilde{u}) \le F(\alpha \bar{x}_k + (1-\alpha)\tilde{x}_k, \alpha \bar{u} + (1-\alpha)\tilde{u}). \]
+
+    Using the convexity of $F$ (in both arguments), we get
+
+    \[
+        \begin{array}{cc}
+            \alpha F(\bar{x}_k,\bar{u}) &+(1-\alpha) F(\tilde{x}_k, \tilde{u})\\
+            \downarrow &\downarrow \\
+            \phi(\bar{u}) & \phi(\tilde{u}).
+        \end{array}
+    \]
+
+    Going to the limit, 
+    
+    \begin{align*}
+         \phi(\alpha \bar{u} + (1-\alpha)\tilde{u}) &\le \alpha \phi(\bar{u}) + (1-\alpha) \phi(\tilde{u}) \\
+            &\le \alpha \bar{v} + (1-\alpha)\tilde{v}.
+    \end{align*}
+
+    Therefore, $(\alpha \bar{u} + (1-\alpha)\tilde{u},\; \alpha \bar{v} + (1-\alpha)\tilde{v}) \in \epi{\phi}$.
+
+\end{proof}
+
+\begin{example}
+    
+    Fix $f_0,f_1,\dots,f_m$ convex functions on $C$ nonempty convex. Define
+
+    \[ f(x) = 
+        \begin{cases}
+            f_0(x) \quad \text{if } x \in C,\, f_i(x) \le 0 \, \forall i = 1,\dots,m \\
+            +\infty \quad \text{otherwise}
+        \end{cases}
+    \]
+
+    Where we put the perturbations? The idea is to perturb the constraints, therefore
+
+    \[ F(x,u) = 
+        \begin{cases}
+            f_0(x) \quad \text{if } x \in C,\, f_i(x) \le u_i \, \forall i = 1,\dots,m \\
+            \\
+            +\infty \quad \text{otherwise}
+        \end{cases}
+    \]
+
+    Then $F : C \times U \to \Rb$, and $f(x) = F(x,0)$. Moreover, $F$ is convex both in $x$ and $u$.
+
+\end{example}
+
+\begin{example}
+    
+    Same structure as above. Assume furthermore that 
+
+    \[ f_i(x) = h_i(A_i x + a_i) + \ell_i(x) \]
+
+    where $A_0,\dots,A_m$ are matrices, $h_i : Z_i \to \Rb$, $a_i \in Z_i$ and $\ell_i$ are affine functions for every $i$.
+
+    Then $u = (u_1,\dots,u_m, z_1,\dots,z_m) \in \R^m \times Z_0 \times \dots \times Z_m =: U$. Then 
+
+    \[ F(x,u) = 
+        \begin{cases}
+            h_0(A_0x + a_0 - z_0) + \ell_0(x) \quad \text{if } x \in C,\, h_i(A_i x + a_i - z_i) + \ell_i(x) \le u_i \\
+            \\
+            +\infty \quad\text{otherwise}
+        \end{cases}
+    \]
+
+\end{example}
+
+\begin{example}
+    
+    Consider the first example setting. Another possibility is to choose
+
+    \[ F(x,u) = 
+        \begin{cases}
+            f_0(x) + r\norm{u}^2 \quad\text{if } x \in C,\ ,f_i(x) \le u_i \\
+            \\
+            +\infty \quad\text{otherwise}
+        \end{cases}
+    \]
+
+\end{example}
+
+\begin{definition}[Concave conjugate]
+    
+    Let $g$ be concave. We define the concave conjugate as 
+
+    \[ g_*(y) = \inf_x y^\top x - g(x). \]
+
+\end{definition}
+
+We define the \emph{Lagrangian} $L$ associated to the representation $F$ the function 
+
+\[ L(x,y) = \inf_u F(x,u) + y^\top u = \left( - F(x,\cdot)\right)_* (y). \]
+
+Assume $F(x,\cdot)$ closed convex for every fixed $x$. Then 
+
+\[ L(x,y) = \left(\underbrace{F(x,\cdot)}_{\text{concave closed}}\right)_*(y) \implies \left(L(x,\cdot)\right)_* = -F(x,\cdot). \]
+
+Thus
+
+\begin{align*}
+    -F(x,u) &= \inf_y y^\top u - L(x,y) \\
+    F(x,u) &= \sup_y L(x,y) - y^\top u
+\end{align*}
+
+if we assume $F(x,\cdot)$ convex closed.
+
+\begin{example}
+    
+    Set as the first example and consider $L(x,y) = \inf_u F(x,u) + y^\top u$. If $x \notin C$ we get $+\infty$. If some $y_i < 0$, then we can take $u$ as large as we want and we get $-\infty$. Assume then $x \in C$, $y_i \ge 0$ for every $i$. Then 
+
+    \[ L(x,y) = \inf_{u : f_i(x) \le u_i} f_0(x) + y^\top u. \]
+
+    We have to take the ''smaller'' possible $u$, thus $u_i = f_i(x)$. Under this condition, we get 
+
+    \[ L(x,y) = f_0(x) + \sum_{i=1}^m y_i f_i(x)\]
+
+    which is the standard Lagrangian in $\Rn$, therefore we are very happy.
+
+\end{example}
+
+
+
+
+
+

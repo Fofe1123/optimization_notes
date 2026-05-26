@@ -1,0 +1,140 @@
+\chapter{Lecture \thechapter{} of 05/05/2026}
+
+\begin{example}[Quadratic programming]
+
+    Consider the problem 
+
+    \[ \inf_x\, \frac12 x^\top Q x + c^\top x \text{ s.t. } Ax \le b \]
+
+    where $Q \in \R^{n \times n}$ SPD, $c \in \Rn$, $A \in \R^{m \times n}$, $b \in \R^m$.
+
+    The perturbation function is 
+
+    \[ F(x,u) = 
+        \begin{cases}
+            \frac12 x^\top Q x - c^\top x \quad \text{if } Ax-b \le u \\
+            \\
+            +\infty \quad \text{otherwise}
+        \end{cases}
+    \]
+
+    The Lagrangian turns out to be 
+
+    \begin{align*}
+        L(x,y) &= \inf_u F(x,u) + y^\top u \\
+            &= \inf_{u \in \R^m,\, Ax - b \le u} \frac12 x^\top Q x - c^\top x + y^\top u.
+    \end{align*}
+
+    Observe that if there exists an index $k$ such that $y_k \le 0$ then we can pick $u$ to be $u = (M,\dots,M, \underbrace{\lambda}_{\text{position } k}, M, \dots, M)$ and take $\lambda \to -\infty$, so $y_k\lambda \searrow -\infty$. Hence we want $y \ge 0$. Then we have to take the smallest possible entries for $u$ that are given by $Ax - b$. Finally, 
+
+    \[ L(x,y) = 
+        \begin{cases}
+            \frac12 x^\top Q x - c^\top x + y^\top (Ax-b) \text{if } y \ge 0 \\
+            \\
+            -\infty \quad\text{otherwise}.
+        \end{cases}
+    \]
+
+    Now we derive the dual function $g$: 
+
+    \begin{align*}
+        g(y) &= \inf_x L(x,y) \\
+            &= \inf_{x \in \Rn} \frac12 x^\top Q x - c^\top x + y^\top (Ax - b) \text{ assuming } y \ge 0
+    \end{align*}
+
+    Consider 
+
+    \[ \frac{\partial L}{\partial x} (x,y) = \nabla_x L(x,y) = Qx - c + A^\top y \]
+
+    therefore 
+
+    \[ \nabla_x L(x,y) = 0 \implies Qx + c + A^\top y = 0 \implies x = Q^{-1}(-c - A^\top y). \]
+
+    Notice that we are allowed to invert $Q$ as it is SPD, therefore the inverse exists. We now substitute in $L$:
+
+    \[ L(Q^{-1}(-c - A^\top y),y) = -\frac12 \left(c + A^\top y\right)^\top Q^{-1}\left(c + A^\top y\right) - b^\top y \]
+
+    assuming $y \ge 0$. Finally, the dual problem is 
+
+    \[ \sup_{y \ge 0} -\frac12 \left(c + A^\top y\right)^\top Q^{-1}\left(c + A^\top y\right) - b^\top y. \]
+
+    Do we have strong duality? Yes, observe that $F$ is jointly convex, and it is bounded in a neighbourhood of $u = 0$.
+    
+\end{example}
+
+\begin{example}[Second order cone programming]
+
+    Consider the problem 
+
+    \[ \inf_{x \in \Rn} f^\top x \]
+
+    under the constraints $\norm{Ax + b} \le cì\top x + d$, where $A \in \R^{m \times n}$, $b \in \R^m$, $c \in \Rn$, $d \in \R$.
+
+    The perturbation function is 
+
+    \[ F(x, (u,z)) = 
+        \begin{cases}
+            f^\top x \quad \text{if } \norm{Ax + b - z} - c^\top x - d \le u \\
+            \\ 
+            +\infty \quad \text{otherwise}
+        \end{cases}
+    \]
+
+    with $z \in \R^m$ and $u \in \R$.
+
+    The Lagrangian is then 
+
+    \[ L(x, (y,w)) = \inf_{(u,z) : \norm{Ax-b-z} - c^\top x - d \le u} f^\top x + yu + w^\top z \]
+
+    where we call $(y,w)$ the ''\emph{dual variable}'', $y \in \R$, $w \in \R^m$. Again, if $y < 0$ then we get $-\infty$. We take then $u$ as small as possible, so $u = \norm{Ax + b -z} - c^\top x - d$. Therefore
+
+    \begin{align*}
+        L(x,(y,w)) &= \inf_z f^\top x + y\left(\norm{Ax + b - z} - c^\top - d\right) + w^\top z \\
+            &= f^\top x - yc^\top x - yd + \inf_z w^\top z + y\norm{Ax + b - z} \quad \tilde{z} = Ax + b - z \\
+            &= f^\top x - y c^\top x - yd + \inf_{\tilde{z}} w^\top \left(Ax + b - \tilde{z}\right) + y\norm{\tilde{z}} \\
+            &= f^\top x - yc^\top x - yd + w^\top \left(Ax + b\right) + \inf_{\tilde{z}} -w^\top \tilde z + y \norm{\tilde{z}} \\
+            &= f^\top x - yc^\top x - yd + w^\top \left(Ax + b\right) - \sup_{\tilde{z}} w^\top \tilde{z} - y\norm{\tilde{z}} \\
+            &= f^\top x - yc^\top x - yd + w^\top \left(Ax + b\right) - y \left(\sup_z \left(\frac{w^\top}{y}\right)z - \norm{z}\right).
+    \end{align*}
+
+    In parenthesis we have the conjugate of the norm function $\left(\norm{\cdot}\right)^*\left(\frac{w}{y}\right)$. We recall that the convex conjugate of the norm function is the convex indicator function of the unit ball. Indeed $\left(\norm{\cdot}\right)(v) = \sup_{z \in \Rn} v^\top z - \norm{z}$. Recall that, in $\ell^2$ it holds that 
+
+    \[ \norm{x} = \sup_{\norm{y} \le 1} x^\top y. \]
+
+    Therefore,
+
+    \begin{align*}
+        \left(\norm{\cdot}\right)^*(v) &= \sup_{z \in \Rn} v^\top z - \norm{z} \\
+        &= \sup_{\norm{z} = 1, \, \lambda \ge 0} \lambda v^\top z - \lambda \\
+        &= \sup_{\lambda \ge 0} \lambda \left(\sup_{\norm{z} = 1} v^\top z - 1\right) \\
+        &= \sup_{\lambda \ge 0} \lambda \left(\norm{v} - 1\right) \\ 
+        &= \begin{cases}
+            0 \quad \text{if } \norm{v} \le 1 \\
+            \\
+            +\infty \quad\text{otherwise}
+        \end{cases} = \delta_{\set{(y,w) : \norm{w/y} \le 1}}.
+    \end{align*}
+
+    In the end, 
+    
+    \[ L(x,(y,w)) = f^\top x - yc^\top x - yd + w^\top (Ax + b) + = \delta_{\set{(y,w) : \norm{w/y} \le 1}}.\]
+
+    The dual function is then 
+
+    \begin{align*}
+        g((y,w)) &= \inf_x L(x,(y,w)) \\
+            &= \inf_x \left(f - yc + A^\top w \right)^\top - yd + w^\top b + = \delta_{\set{(y,w) : \norm{w/y} \le 1}} \\
+            &= \begin{cases}
+                -yd + w^\top b = \delta_{\set{(y,w) : \norm{w/y} \le 1}} \quad \text{if } f - yc + A^\top w = 0 \\
+                \\
+                -\infty \quad\text{otherwise}.
+            \end{cases}
+    \end{align*}
+
+    The dual problem is then 
+
+    \[ \sup_{(y,w)} - yd + w^\top b \]
+
+    under the constraints $f - yc + A^\top w = 0$, $\norm{w} \le \abs{y}$.
+    
+\end{example}

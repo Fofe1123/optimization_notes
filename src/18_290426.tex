@@ -1,0 +1,135 @@
+\chapter{Lecture \thechapter{} of 29/04/2026}
+
+If $\phi(0) = \phi^{**}(0)$ then $\partial\phi(0) = \set{y : y \text{ is a minimizer of } \phi^*}$. 
+
+\underline{Comment:} Let $\phi$ convex and continous on $\inter{\dom{\phi}}$. Previously we said $\phi$ restricted to $\ri{\dom{f}}$ is continous. Consider $\phi : \R^2 \to \Rb$, 
+
+\[ \phi(x,y )= 
+    \begin{cases}
+        0 \quad \text{if } 0 \le x \le 1,\, y = 0 \\
+        \\
+        +\infty \quad \text{otherwise}
+    \end{cases}
+\]
+
+note that $\dom{f} = \set{(x,y) : x \in [0,1],\, y = 0}$, so a segment, therefore $\inter{\dom{f}} = \emptyset$. But $\ri{\dom{f}} = \set{(x,y) : x \in (0,1),\, y=0} =: A$. Then $\phi : A \to \Rb$ is continous.
+
+\section{Primal/dual setting}
+
+Let $f : X \to \Rb$, $F = X \times U \to \R$ such that $f(x) = F(x,0)$, $\phi : U \to \Rb$, $\phi(u) = \inf_x F(x,u)$, $L : X \times Y \to \Rb$, $g : Y \to \R$, $G : Y \times V \to \Rb$ such that $g(y) = G(y,0)$, $\gamma : V \to \R$, $\gamma(v) = \sup_y G(y,v)$. 
+
+Denote as 
+
+\begin{align*}
+    &(P) \text{ minimize } f \text{ over } X,\, \inf_x f(x) = \inf(P) \\
+    &(D) \text{ maximize } g \text{ over } Y,\, \sup_y g(y) = \sup(D)
+\end{align*}
+
+Note that $\bar{x}$ solves $(P) \iff 0 \in \partial f(\bar{x})$ and $\bar{y}$ solves $(D)$ if $0 \in \partial g(\bar{y})$, which the last one is a notational horror as, if $g$ is concave, $\partial g(y)$ denotes the \emph{superdifferential} of $g$ at $y$, i.e. $z \in \partial g(y)$ if $g(w) \le g(y) + \langle z, w-y \rangle$.
+
+We now look at $L$: we assert that a point $(v,u) \in \partial L(\bar{x},\bar{y})$ if $v \in \partial_x L(\bar{x},\bar{y})$ and $u \in \partial_y L(\bar{x},\bar{y})$, which means that 
+
+\begin{align*}
+    L(x,\bar{y}) &\ge L(\bar{x},\bar{y}) + \langle v, x - \bar{x} \rangle \quad \forall x \\
+    L(\bar{x},y) &\le L(\bar{x},\bar{y}) + \langle u, y-\bar{y}\rangle \forall y.
+\end{align*}
+
+\underline{Notation}: we dub the relation $(0,0) \in \partial L(\bar{x},\bar{y})$ as the \emph{Khun-Tucker condition} for $(P)$. 
+
+\begin{theorem}[Book 15]
+
+    The implications $(a) \iff (b) \implies (c) \implies (d)$ hold among the following conditions:
+
+    \begin{enumerate}
+        \item[$(a)$] $\inf(P) = \sup(D)$;
+        \item[$(b)$] $\phi(0) = \cl{\conv{\phi}}(0)$;
+        \item[$(c)$] the saddle value of $L$ exists;
+        \item[$(d)$] $\gamma(0) = \cl{\gamma}(0)$.
+    \end{enumerate}
+
+    Assuming $F(x,\cdot)$ closed convex for all $x$, then $(a) \iff (b) \iff (c)$. Assuming $F$ jointly convex, they are all equivalent. Furthermore, it holds also $(e) \implies (f)$ where 
+
+    \begin{enumerate}
+        \item[$(e)$] $\bar{x}$ solves $(P)$, $\bar{y}$ solves $(D)$, $\inf(P) = \sup(D)$
+        \item[$(f)$] $(\bar{x},\bar{y})$ satisfies the Khun-Tucker condition.
+    \end{enumerate}
+
+    Assuming $F(x,\cdot)$ closed convex for every $x$, then $(e) \iff (f)$.
+    
+\end{theorem}
+
+\begin{proof}
+    Not required.
+\end{proof}
+
+\begin{corollary}
+    
+    Suppose $\inf(P) = \sup(D)$ and $\sup(D)$ is attained. then $\bar{x}$ solves $(P) \iff \exists \, \bar{y}$ such that $(\bar{x},\bar{y})$ satisfies the Khun-Tucker condition.
+
+\end{corollary}
+
+\begin{theorem}
+    
+    Let $\bar{y} \in Y$, then the following are equivalent:
+
+    \begin{enumerate}
+        \item[$(a)$] $\bar{y}$ solves $(D)$ and $\inf(P) = \sup(D)$;
+        \item[$(b)$] $-\bar{y} \in \partial \phi(0)$;
+        \item[$(c)$] $\inf_x L(x,\bar{y}) = \inf_x f(x)$.
+    \end{enumerate}
+
+\end{theorem}
+
+
+\begin{proof}
+    
+    We know that $-g(y) = \phi^*(-y)$ and $\sup(D) = \phi^{**}(0)$. Condition $(a)$ is equivalent to $0 \in \partial\phi^*(-y)$ because $0 \in \partial g(\bar{y})$, hence $\phi^{**}(0) = \phi(0)$, then apply the first proposition of today, so it follows $(a) \iff (b)$. 
+
+    To prove $(a) \iff (c)$ observe that $g(\bar{y}) = \inf(P)$ is a rewrite of $(c)$ and use the inequality $g(y) \le \inf(P)$.
+
+\end{proof}
+
+\begin{theorem}
+    
+    If $F$ is jointly convex, then $\phi$ is convex. Assume $\phi$ is bounded on a neighbourhood of $0$, then $\inf(P) = \sup(D)$ and there exists at leas one $\bar{y}$ such that $\bar{y}$ solves $(D)$.
+
+\end{theorem}
+
+\begin{proof}
+    Under our assumptions, $\phi$ is continous at $0$, and everything follows.
+\end{proof}
+
+\begin{remark}
+    
+    We are happy also if $0 \in \inter{\dom{\phi}}$.
+
+\end{remark}
+
+\begin{example}
+    
+    Considet the problem 
+
+    \[ \inf_x f_0(x) \quad \text{s.t } f_i(x) \le 0. \]
+
+    Then 
+
+    \[ \phi(u) = \inf_x \set{f_0(x) : x \in C,\, f_i(x) \le u_i}. \]
+
+    Observe that $\dom{\phi} = \set{u \in \R^m : \exists x \in C \text{ s.t. } f_i(x) \le u_i}$. Therefore $0 \in \dom{\phi}$ if there exists $x$ such that $f_i(x) < 0$ for every $i$.
+
+\end{example}
+
+We will now prove strong duality for the Fenchel's problem. In this setting we have $\phi(u) = \inf_x \, h(x) + K(Ax+u)$, and the $F$ that we defined is indeed jointly convex. To have $0 \in \dom{\phi}$ i can ask that there exists $\bar{x} \in \dom{h}$ such that $K$ is bounded form above in a neighbourhood of $A\bar{x}$. 
+
+What about subdifferentials? $(0,0) \in \partial L(\bar{x},\bar{y})$ if $\bar{x}$ solves $\inf(P)$ and $\bar{y}$ solves $\sup(D)$. The confition is then $L(x,\bar{y}) \ge L(\bar{x},\bar{y})$ for any $x$. Recall that $L(x,y) = h(x) - K^*(-y) - y^\top A x$. Therefore, 
+
+\begin{align*}
+    h(x) - K^*(-y) - y^\top A x &\ge h(\bar{x}) - K^*(-y) - y^\top A x \\
+    h(x) &\ge h(\bar{x}) + \langle A^\top \bar{y}, x - \bar{x} \rangle \quad \forall x.
+\end{align*}
+
+This condition is equivalent to $A^\top y \in \partial h(\bar{x})$. With a similar argument for the second case we get $A\bar{x} \in \partial K^*(-\bar{y})$. 
+
+
+
+

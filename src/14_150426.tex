@@ -1,0 +1,37 @@
+\chapter{Lecture \thechapter{} of 15/04/2026}
+
+\begin{example}
+    
+    Consider $f(x) = e^{-x}$, $X = (-\infty,1]$. Then $f$ is convex and closed. Then 
+
+    \begin{align*}
+        \rf{f} &= \set{d : d \ge 0} \\
+        \Rc{X} &= \set{d : d \le 0}.
+    \end{align*}
+
+    Hence $\rf{f} \cap \Rc{X} = \set{0}$, this implies that $f$ attains the infimum over $X$.
+
+\end{example}
+
+\begin{proposition}[Book 3.2.4]
+
+    Let $X$ be closed convex in $\Rn$, $f : \Rn \to (-\infty,+\infty]$ convex and closed. Assume $X \cap \dom{f}$ nonempty. Then the set of minima of $f$ over $X$, denoted by $X^*$ is nonempty under one among the following assumptions/conditions: 
+    
+    \begin{enumerate}
+        \item $\Rc{f} \cap \Rc{X} = \Lc{X} \cap \Lc{f}$;
+        \item $\Rc{X} \cap \Rc{f} \seq \Lc{f}$ and $X$ is polyhedral. 
+    \end{enumerate}
+
+    Furthermore, under 1., $X^* = \tilde{X} + (\Lc{x} \cap \Lc{f})$ where $\tilde{X}$ is some compact set in $\Rn$. 
+    
+\end{proposition}
+
+\begin{proof}
+    
+    Let $\tilde{f} = \inf_{x \in X} f(x) < +\infty$ as $X \cap \dom{f}$ is nonempty. Let $\set{\gamma_k}_k$ such that $\gamma_k \to \tilde{f}$ and $\gamma_k \ge \tilde{f}$ for any $k$. Set $V_k = \set{x : f(x) \le \gamma_k}$. Note $X^* = \bigcap_k (X \cap V_k)$. 
+
+    Assume 1., then $\set{X \cap V_k}_k$ is a nestes sequence of closed convex sets. $\Rc{X} \cap V_k = \Rc{X} \cap \Rc{V_k} = \Rc{X} \cap \Rc{f} = \Lc{X} \cap \Lc{f} = \Lc{X} \cap \Lc{V_k} = \Lc{X \cap V_k}$. By 1.4.11(a) $X^*$ is nonempty and it holds ist characterization.
+
+    Assume 2., then $\Rc{X} \cap \Rc{V_k} = \Rc{X} \cap \Rc{f} \seq \Lc{f}$, $X$ polyhedral, so retractive. By 1.4.11(b), $X^*$ is nonempty.
+
+\end{proof}

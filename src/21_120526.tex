@@ -1,0 +1,180 @@
+\chapter{Lecture \thechapter{} of 12/05/2026}
+
+\section{Proximal algorhitms}
+
+We know that $x^*$ minimizes $f \iff x^*$ is a fixed point of $\prox{\lambda f}$. 
+
+\underline{Idea}: $x^0$ given, iterate a fixed point iteration $x^{k+1} = \prox{\lambda f}(x^k)$. We know that this works if $\prox{\lambda f}$ is a contraction!
+
+\begin{proposition}
+    
+    The proximal mapping is 1-Lipschits continous (assuming $f$ convex proper closed, $\lambda > 0$), i.e. $\norm{\prox{\lambda f}(x) - \prox{\lambda f}(y)} \le \norm{x - y}$.
+
+\end{proposition}
+
+\begin{proof}
+    
+    \begin{align*}
+        \hat{x} &= \prox{\lambda f}(x) \implies \langle x - \hat{x}, \hat{y} - \hat{x} \langle + \lambda \left(f(\hat{x}) - f(\hat{y})\right) \le 0 \\
+        \hat{y} &= \prox{\lambda f}(y) \implies \langle y - \hat{y}, \hat{x} - \hat{y} \rangle + \lambda \left(f(\hat{y}) - f(\hat{x})\right) \le 0.
+    \end{align*}
+
+    Taking the sum of the two, we end up with the relation 
+
+    \[ \langle \hat{x} - x, \hat{x} - \hat{y} \rangle + \langle y - \hat{y}, \hat{x} - \hat{y} \rangle \le 0. \]
+
+    Consider $\norm{\hat{x} - \hat{y}}^2$, then 
+
+    \begin{align*}
+        \norm{\hat{x} - \hat{y}}^2 &= \langle \hat{x} - \hat{y}, \hat{x} - \hat{y} \quad \pm x, \, \pm y \text{ in the first term and expand} \\
+        &= \langle \hat{x} - x, \hat{x}-\hat{y}\rangle + \langle y - \hat{y}, \hat{x} - \hat{y}\rangle + \langle x-y, \hat{x}-\hat{y}\rangle \\ 
+        &\le \langle x-y, \hat{x} - \hat{y}\rangle \le \norm{x-y}\cdot \norm{\hat{x} - \hat{y}}.
+    \end{align*}
+
+    Therefore $\norm{\hat{x} - \hat{y}} \le \norm{x-y}$.
+
+\end{proof}
+
+\subsection{Proximal point method}
+
+$x^0$ given, $x^{k+1} = \prox{t_k f}(x^k)$ for $\set{t_k}_k$ a given sequence of steps. Recall that $\nabla M_{\lambda f}(x) = \frac1\lambda (x - \prox{\lambda f}(x)) \implies x^{k+1} = x^k - t_k \nabla M_{t_k f}(x^k)$.
+
+\begin{proposition}
+    
+    $f(x^{k+1}) \le f(x^k) - \displaystyle\frac{1}{t_k} \norm{x^{k+1} - x^k}^2$.
+
+\end{proposition}
+
+\begin{proof}
+    
+    Immidiate consequence of variational inequality.
+
+\end{proof}
+
+\begin{proposition}
+    
+    Let $f$ be proper closed convex, $f_{\mathrm{opt}} = f(x^*) = \min_x f(x)$. Then it holds that 
+
+    \begin{align*}
+        \norm{x^{k+1} - x^*} &\le \norm{x^k - x^*} \\
+        f(x^{N+1}) - f_{\mathrm{opt}} &\le \frac{\norm{x^0 - x^*}}{2\sum_{k=1}^N t_k}
+    \end{align*}
+
+    where $N$ is the total number of steps.
+
+\end{proposition}
+
+\section{Splitting methods}
+
+Assume that we can decompose the objective function as $f(x) + g(x)$, where $f$ is ''simple in the prox sense'', i.e. it is easy to compute $\prox{\lambda f}$ and $g$ is smooth.
+
+Our main assumption is $g : \R^d \to \R$ convex and differentiable. Moreover, we assume $\nabla g$ to be $L$-Lipschits continous, $L > 0$, i.e. 
+
+\[ \norm{\nabla g(x) - \nabla g(y)} \le L\norm{x - y}. \]
+
+In this case we say that $g$ is $L$-smooth.
+
+\begin{lemma}
+    
+    If $g : \R^d \to \R$ is $L$-smooth then
+
+    \[ g(y) - g(x) - \langle \nabla g(x), y - x \rangle \le \frac{L}{2} \norm{x  - y}^2. \]
+
+\end{lemma}
+
+\begin{proof}
+    
+    \begin{align*}
+        g(y) - g(x) - \langle \nabla g(x), y - x \rangle &= \int_0^1 \langle \nabla g(x + \tau(y-x)) - \nabla g(x), y - x \rangle \, \dd \tau \\
+        &= \int_0^1 \norm{\nabla g(x + \tau(y-x)) - \nabla g(x)} \cdot \norm{y-x}\, \dd \tau \\
+        &\le L \int_0^1 \norm{\tau (y-x)} \cdot \norm{y-x}\, \dd \tau \\
+        &\le \frac{L}{2} \norm{y-x}^2
+    \end{align*}
+
+\end{proof}
+
+Let now $\lambda > 0$, define $x^+ = x - \lambda \nabla g(x)$ a descend step for $g$. By the above lemma, 
+
+\begin{align}
+    g(x^+) &\le g(x) + \langle \nabla g(x), x^+ - x \rangle + \frac{L}{2}\norm{x^+ - x}^2 \\
+    &\le g(x) + \langle \nabla g(x) ,  -\lambda \nabla g(x)\rangle + \frac{L}{2} \norm{\lambda \nabla g(x)}^2 \\
+    &= g(x) -\lambda \norm{\nabla g(x)}^2 + \lambda^2 \frac{L}{2} \norm{\nabla g(x)}^2  \\
+    &= g(x) - \lambda \left(1-\frac{L}{2}\lambda\right) \norm{\nabla g(x)}^2
+\end{align}
+
+which means that $g(x^+) \le g(x)$ provided that $0 \le \lambda \le 2/L$. What about $f + g$? Substitute $g$ with an upper bound, 
+
+\[ g(x^k) + \langle \nabla g(x^k), x - x^k\rangle + \frac{1}{2\lambda} \norm{x - x^k}^2\]
+
+in the spirit of the above lemma.
+
+Then 
+
+\begin{align*}
+    x^{k+1} &= \argmin_x \left[ f(x) + g(x^k) + \langle \nabla g(x^k), x - x^k \rangle - \frac{1}{2\lambda} \norm{x - x^k}^2 \right] \\
+    &= \argmin_x \left[ f(x) + \langle \nabla g(x^k), x - x^k \rangle - \frac{1}{2\lambda} \norm{x - x^k}^2 \right].
+\end{align*}
+
+Observe that
+
+\begin{align*}
+    \langle \lambda \nabla g(x^k), x - x^k\rangle &= \frac12 \norm{x - x^k} + 2\langle \lambda \nabla g(x^k), x - x^k\rangle + \norm{\lambda\nabla g(x^k)}^2 - \norm{\lambda \nabla g(x^k)}^2 \\
+    &= \frac12 \norm{x - (x^k - \lambda \nabla g(x^k))}^2 - \frac12 \lambda^2 \norm{\nabla g(x^k)}.
+\end{align*}
+
+In the end, $ x^{k+1} = \argmin_x \left[ \lambda f(x) + \frac12 \norm{x - (x^k -\lambda \nabla g(x^k))}^2\right]$. Therefore, 
+
+\[ x^{k+1} = \prox{\lambda f}(x^k -\lambda \nabla g(x^k)). \]
+
+This iteration is called proximal gradient method.
+
+\begin{example}[Regularized least squares]
+
+    We are interested in 
+
+    \[ \min_{x \in \Rn} \norm{Ax - b}^2 \]
+
+    where $A \in \R^{m \times n}$, $b \in \R^m$. Define $g(x) = \frac12\norm{Ax -b}^2$, so that $\nabla g(x) = A^\top \left(Ax - b\right) \implies A^\top A x = A^\top b$ is the minimum point. 
+    
+    The data $b$ could be noisy or corrupted, so we add a regularizing term. The problem becomes 
+
+    \[ \min_x \frac12 \norm{Ax-b}^2 +\alpha R(x) \]
+
+    where the first takes the role of $g(x)$ and the second $f(x)$.
+    
+\end{example}
+
+\section{Primal-dual Chambolle-Pock algorithm}
+
+We are interested in the problem 
+
+\[ \min_x h(x) + K(Ax) \]
+
+where $h,K$ are convex proper closed functions, $A$ a matrix. The idea is: instead of optimize directly, we look at the Lagrangian and we try to optimize for a saddle point. 
+
+So, given $(x^k, y^k)$ optimize for $\max_y L(x^k,y)$. Observe that 
+
+\[
+    \max_y h(x^k) - K^*(-y) - y^\top A x^k = -\min_y K^*(y) - y^\top A x^k.
+\]
+
+Define $y^{k+1} \approx -\argmin_y K^*(y) - y^\top A x^k$ as done via the proximal gradient step on $y$, therefore 
+
+\[ y^{k+1} = -\prox{\sigma K^*} (y^k + \sigma A x^k). \]
+
+Given then $(x^k,y^{k+1})$ we do a primal descend step on $x$, hence 
+
+\begin{align}
+    x^{k+1} &\approx \argmin_x L(x,y^{k+1}) \\
+        &\approx h(x) - \underbrace{K^*(-y^{k+1})}_{\text{not depending on } x} - (y^{k+1})^\top A x \\
+        &\approx \argmin_x h(x) - (y^{k+1})^\top A x \\
+        &\implies x^{k+1} = \prox{\tau h} (x^k + A^\top y^{k+1}).
+\end{align}
+
+The final algorithm then reads: choose $\tau, \sigma > 0$, $\vartheta \in [0,1]$, $(x^0,y^0)$ and set $\bar{x}^0 = x^0$. Then iterate 
+
+\begin{align*}
+    y^{k+1} &= \prox{\sigma K^*} (y^k + \sigma A \bar{x}^k) \\
+    x^{k+1} &= \prox{\tau h} (x^k - \tau A^\top y^{k+1}) \\
+    \bar{x}^{k+1} &= x^{k+1} + \vartheta (x^{k+1} - x^{k}).
+\end{align*}

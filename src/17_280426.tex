@@ -1,0 +1,164 @@
+\chapter{Lecture \thechapter{} of 28/04/2026}
+
+\section{Fenchel's duality}
+
+Consider
+
+\begin{align*}
+    h:& \Rn \to \Rb \text{ proper convex}\\
+    K:& \R^m \to \Rb \text{ proper convex} \\
+    A:& \Rn \to \R^m \text{ linear application}
+\end{align*}
+
+and set the problem to be 
+
+\[ \inf_x f(x),\, f(x) = h(x) + K(Ax). \]
+
+Then the preturbation function is 
+
+\[ F(x,u) = h(x) + K(Ax + u). \]
+
+The Lagrangian is
+
+\begin{align*}
+    L(x,y) &= \inf_u F(x,u) + y^\top u \\
+        &= \inf_u h(x) + K(Ax + u) + y^\top \\
+        &= h(x) + \inf_u K(Ax + u) + y^\top u \quad \tilde{u} = Ax + u \\
+        &= h(x) + \inf_{\tilde{u}} K(\tilde{u}) + y^\top (\tilde{u} - Ax) \\
+        &= h(x) - \sup_{\tilde{u}} (-y)^\top \tilde{u} - K(\tilde{u}) - y^\top A x \\
+        &= h(x) - K^*(-y) - y^\top Ax
+\end{align*}
+
+assuming $h(x) < +\infty$.
+
+In the dual, consider the perturbation function 
+
+\begin{align*}
+    G(y,v) &= -F^*(v,-y) \\
+        &= -\sup_{(x,u)}\, v^\top x - y^\top u - h(x) - K(Ax + w) \\
+        &= -\sup_{(x,\tilde{u})}\, v^\top x - y^\top \tilde{u} + y^\top A x - h(x) - K(\tilde{u}) \\
+        &= -\sup_{x} \, \underbrace{v^\top x + y^\top A x}_{=(v + A^\top y)^\top x} - h(x) - \sup_{\tilde{u}} (-y)^\top \tilde{u} - K(\tilde{u}) \\
+        &= -h^*(v+A^\top y) - K^*(-y). 
+\end{align*}
+
+So $g(y) = G(y,0) = -h^*(A^\top y) - K^*(-y)$, hence the dual problem is 
+
+\[ \sup_y -h^*(A^\top y) -K^*(-y). \]
+
+\section{Subdifferentials}
+
+\begin{recall}
+
+    If $\phi : U \to \Rb$ is convex, then $\phi$ is continous on $\inter{{\dom{f}}}$
+
+\end{recall}
+
+\begin{recall}
+
+    $0 \in \inter{\dom{f}} \iff \set{y : \phi^*(y) \le \beta}$ is compact for any $\beta$ and one subset of this type is nonempty, $\phi(0) < +\infty$.
+
+\end{recall}
+
+\begin{recall}
+
+    Let $\phi$ convex. If one of the sublevel sets is compact, then all sublevel sets are compact.
+
+\end{recall}
+
+\begin{recall}
+
+    For any $\phi$, the convex conjugate function $\phi^*(y) = \sup_u y^\top u - \phi(u)$ is convex.
+
+\end{recall}
+
+What about differentiability? In general, convexity does not imply differentiability, e.g. $\phi(x) = \abs{x}$.
+
+\begin{definition}[Subgradient/subdifferential]
+
+    Let $\phi : U \to \Rb$, $u \in U$. We say that $y \in U$ is a \emph{subgradient} of $\phi$ at $u$ if 
+
+    \[ \phi(v) \ge \phi(u) + \langle y, v-u \rangle \]
+
+    for any $v \in U$. Furthermore denote as the \emph{subdifferential} of $\phi$ at $u$ the set  
+
+    \[ \partial \phi(u) = \set{y : y \text{ subgradient of } \phi \text{ at } u}. \]
+    
+\end{definition}
+
+\begin{remark}
+    
+    If $\phi$ is differentiable at $u$, then $\partial \phi(u) = \set{\nabla \phi(u)}$.
+
+\end{remark}
+
+Assume now $\phi : U \to \Rb$ convex proper, $\phi \neq +\infty$. 
+
+closed and convex: consider $y_1,y_2 \in \partial\phi(u)$, $\alpha \in (0,1)$. Then 
+
+\begin{itemize}
+    \item $\partial\phi(u)$ closed and convex: 
+        
+        \begin{align*}
+            &\phi(v) \ge \phi(u) + \langle y_1, v-u \rangle \, \forall v \\
+            &\phi(v) \ge \phi(u) + \langle y_2, v-u \rangle \, \forall v.
+        \end{align*}
+
+        Multiply the first by $\alpha$ and second by $(1-\alpha)$. Then 
+
+        \begin{align*}
+            \alpha \phi(v) + (1-\alpha) \phi(v) &\ge \alpha \phi(u) + (1-\alpha)\phi(u) + \langle \alpha y_1 + (1-\alpha)y_2, v-u \rangle \\
+            \phi(v) &\ge \phi(u) + \langle \alpha y_1 + (1-\alpha)y_2, v-u\rangle \, \forall v.
+        \end{align*}
+
+        Therefore, $\alpha y_1 + (1-\alpha)y_2 \in \partial \phi(u)$. Consider now a sequence $\set{y_k}_k \seq \partial \phi(u)$ such that $y_k \to \bar{y}$. Then 
+
+        \[
+            \begin{array}{ccc}
+                \phi(v) &\ge \phi(u) &+\langle y_k, v-u\rangle \\
+                & & \downarrow \\
+                \phi(v) &\ge \phi(u) &+\langle \bar{y}, v-u \rangle
+            \end{array}
+        \]
+
+        Hence $\bar{y} \in \partial\phi(u)$.
+
+    \item If $\phi$ is continous at $u$, then $\partial\phi(u)$ is bounded: let $y \in \partial \phi(u)$, then $\phi(v) \ge \phi(u) + \langle y, v-u \rangle$. By continuity of $\phi$ in $u$, there exists $\delta > 0$ such that $\abs{\phi(v) - \phi(u)} \le 1$ for any $v \in B(u,\delta)$. Then 
+            
+    \[ \langle y, v-u \rangle \le \abs{\phi(v) - \phi(u)} \le 1 \implies \sup_{\norm{z} \le \delta} \langle y,z \rangle \le 1. \]
+
+    We know that $\norm{y} = \sup_{\norm{x} \le 1} \langle x,y \rangle$, therefore
+    
+    \[ \delta \norm{y} \le 1 \implies \norm{y} \le 1/\delta\]
+
+    showing that $\partial\phi(u)$ is bounded.
+
+    \item $\phi(\bar{u}) = \inf_u \phi(u) \iff 0 \in \partial\phi(\bar{u})$: 
+        \begin{align*}
+            &0 \in \partial\phi(\bar{u}) \implies \phi(v) \ge \phi(\bar{u}) + \langle 0, v-\bar{u} \rangle \implies \phi(v) \ge \phi(\bar{u}) \implies \bar{u} \text{ is a min} \\
+            &\phi(\bar{u}) = \inf_u \phi(u) \implies \phi(v) \ge \phi(\bar{u}) \implies \phi(v) \ge \phi(\bar{u}) + \langle 0, v-\bar{u}\rangle
+        \end{align*}
+
+    \item if $\partial\phi(u) \neq \emptyset$, then $\phi(u) = \phi^{**}(u)$: let $y \in \partial\phi(u)$. Then $\phi(v) \ge \phi(u) + \langle y, v-u\rangle =$ convex closed function below $\phi$. We know $\phi^{**}$ si the greatest convex closed function below $\phi$, hence $\phi(v) \ge \phi^{**}(v) \ge \phi(u) + \langle y, v-u \rangle$. If $u = v$, then we have equality.
+    \item $y \in \partial\phi(u) \iff \phi(u) + \phi^*(u) = \langle y,u \rangle$. In this case $y \in \dom{\phi^*}$.
+    \begin{enumerate}
+        \item[''$\implies$''] $y \in \partial\phi(u)$
+            \begin{align*}
+                &\phi(v) \ge \phi(u) + \langle y, v-u\rangle \\
+                & \langle y,u\rangle -\phi(u) \ge \langle y,v\rangle - \phi(v) \\
+                &\langle y,u\rangle - \phi(u) \ge \sup_v \langle y,v \rangle -\phi(v) \\
+                &\langle y,u\rangle - \phi(u) \ge \phi^*(y)
+            \end{align*}
+        Therefore, by Fenchel's inequality, we get the claim.
+        \item[''$\impliedby$''] reverse the last argument.
+    \end{enumerate}
+    \item if $\phi(u) = \phi^{**}(u)$ then $\partial\phi(u) = \partial\phi^{**}(u)$: if $y \in \partial\phi^{**}(u)$, then $\phi^{**}(v) \ge \phi^{**}(u) + \langle y, v-u\rangle \implies \phi^{**}(v) \ge \phi(u) +\langle y, v-u\rangle$. We know $\phi(v) \ge \phi^{**}(v)$ foe every $v$, hence $y \in \partial\phi(u)$, therefore $\partial\phi^{**}(u) \seq \partial\phi(u)$. If instead $y \in \partial\phi(u)$, then $\phi(u) < \infty$ and $\phi(v) \ge \phi(u) + \langle y, v-u\rangle = \phi^{**}/u
+    + \langle y, v-u\rangle$, which the last is a closed convex function below $\phi$, but we know that $\phi^{**}$ is the biggest of such a function, therefore $\phi^{**}(v) \ge \phi^{**}(u) + \langle y, v-u\rangle$, hence $y \in \partial \phi^{**}(u)$.
+    \item $y \in \partial\phi(u) \iff u \in \partial\phi^*(u)$ and $\phi(u) = \phi^{**}(u)$: let $y \in \partial\phi(u)$, by the above point, $\phi(u) + \phi^*(u) = \langle y,u\rangle \implies \phi(u) \ge \phi^{**}(u) = \sup_z \langle z,u \rangle - \phi^*(u) \ge \langle y,u \rangle - \phi^*(y) = \phi(u) \implies \phi(u) = \phi^{**}(u)$. Recall that $\phi^*(z) = \sup_v z^\top v - \phi(v) \ge z^\top u -\phi(u) = z^\top u - y^\top u + \phi^*(y)$, hence $\phi^*(z) \ge \phi^*(y) + \langle u, z-y \rangle$, therefore $u \in\partial\phi^*(y)$.
+\end{itemize}
+
+\begin{corollary}
+    
+    If $\phi = \phi^{**}$, then $y \in \partial\phi(u) \iff u \in \partial\phi^*(y)$ for every $y$.
+
+\end{corollary}
+

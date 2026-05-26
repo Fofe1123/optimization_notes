@@ -1,0 +1,175 @@
+\chapter{Lecture \thechapter{} of 22/04/2026}
+
+\begin{theorem}{Book ???}
+    
+    \begin{enumerate}
+        \item $L(x,\cdot)$ is closed and concave (the hypergraph below is closed and it is upper semicontinous, i.e. $\set{(y,w) : w \le L(x,y)}$);
+        \item if $F(x,\cdot)$ is closed convex for every fixed $x$, then $f(x) = \sup_y L(x,y) (\star)$;
+        \item if $L : X \times Y \to \Rb$ is a function such that $(\star)$ holds, and if $L(x,\cdot)$ is closed concave for every $x$, then $L$ is the Lagrangian associated with a uniquely determined representation $f(x) = F(x,0)$ having $F$ closed convex in $u$, with $F(x,u) = \sup_y L(x,y) - y^\top u$;
+        \item if $F(x,\cdot)$ is closed convex, then $L(\cdot,y)$ is convex for every fixed $y$ if and only if $F$ is convex in $(x,u)$.
+    \end{enumerate}
+
+\end{theorem}
+
+\begin{proof}
+
+    \textbf{1.}: $L(x,y) = \inf_u F(x,u) + y^\top u = \inf_u \text{affine function in }y$, which is closed and concave.
+    
+    \textbf{2.}: we proved it last lecture, so 
+
+    \[ F(x,u) = \sup_y L(x,y) - y^\top u \]
+
+    but $f(x) = F(x,0) = \sup_y L(x,y)$.
+
+    \textbf{3.}: follows from the definition.
+
+    \textbf{4.}: assume $F(x,\cdot)$ closed convex. Assume $L(\cdot,y)$ convex. Then the map $(x,u) \mapsto L(x,y) - y^\top u$ is convex in $x$ for each fixed $y$. It is also convex in $u$ for any $y$ fixed. From 2., $F(x,u) = \sup_u L(x,y) - y^\top u$, which is convex as the supremum of a family of jointly convex functions in $x$ and $u$.
+
+    Assume now $F$ jointly convex in $(x,u)$. Then 
+
+    \[ L(x,y) = \inf_u F(x,u) + y^\top u \]
+
+    which, for any fixed $y$, is a convex function in $(x,u)$. Therefore, $L(\cdot,y)$ is convex as optimal value function.
+
+\end{proof}
+
+From now on, we will denote with
+
+\begin{align*}
+    &(P) \, \inf_x f(x) \text{ where } f(x) = \sup_y L(x,y) \text{ as the primal problem}\\
+    &(D) \, \sup_y g(y) \text{ where } g(y) = \inf_x L(x,y) \text{ as the dual problem} 
+\end{align*}
+
+and the optimal value function $\phi(x) = \inf_u F(x,u)$.
+
+\begin{theorem}[Main]
+    
+    \begin{enumerate}
+        \item The function $g$ in $(D)$ is concave and closed. Indeed we have the following relation:
+            \[ g = (-\phi)_*,\, -g_* = \cl{\co{\phi}} \]
+            the convex closure of $\phi$;
+        \item if $F$ is jointly convex in $(x,u)$ then $-g_* = \cl{\phi}$ and, indeed,
+            \[ \sup_y g(y) = \liminf_{u \to 0} \phi(u) \]
+            assuming $0 \in \cl{\dom{\phi}}$.
+    \end{enumerate}
+
+\end{theorem}
+
+\begin{proof}
+    
+    \begin{align*}
+        g(y) &= \inf_x L(x,y) \\
+            &= \inf_{x,u} F(x,u) + y^\top u \\
+            &= \inf_u \inf_x F(x,u) + y^\top u \\
+            &= \inf_u \phi(u) + y^\top u \\
+            &= \inf_u y^\top u - (-\phi)(u) = (-\phi)_*(y).
+    \end{align*}
+
+    Furthermore, 
+
+    \[ g = (-\phi)_* \implies g_* = (-\phi)_{**}. \]
+
+    Observing that $-(-\phi)_{**} = \phi^{**}$ we conclude that $-g_* = \phi^{**} = \ccl{\phi}$. 
+
+    If $F$ is jointly ocnvex in $(x,u)$ we know that $\phi$ is convex, hence $\ccl{\phi} = \cl{\phi}$. Since we know that the closure of $\phi$ is LSC, then $\sup_y g(y) = \inf_x f(x) = \cl{\phi}(0) = \liminf_{u \to 0} \phi(u)$.
+ 
+\end{proof}
+
+How if we reverse the problem? Consider $g(y) = G(y,0)$, so that $G : Y \times V \to \Rb$, $G(y,v) = \inf_x L(x,y) - v^\top x$. Define the \emph{dual optimal value function} $\gamma(v) = \sup_y G(y,v)$. Observe that 
+
+\[ G(y,v) = \inf_x \inf_u F(x,u) + y^\top u - v^\top x = -F^*(v,-y) \]
+
+where 
+
+\[ F^*(v,-y) = \sup_{x,u} (v,-y)^\top (x,u) - F(x,u). \]
+
+\begin{theorem}
+    
+    \begin{enumerate}
+        \item $G$ concave closed, $\gamma$ closed;
+        \item if $F$ is convex (jointly in $(x,u)$) then 
+            \[ F(x,u) = \sup_{y,v} G(y,v) + x^\top v - y^\top u = -G^*(-x,u). \]
+        Moreover, $f = (-\gamma)^*$, $-f^* = \cl{\gamma}$;
+        \item if $f$ is convex, then 
+            \[ \inf_x f(x) = \limsup_{v \to 0} \gamma(v) \]
+            assuming $0 \in \cl{\dom{\gamma}}$.
+    \end{enumerate}
+
+\end{theorem}
+
+\begin{proof}[Exercise]
+
+    \begin{align*}
+        F(x,u) &= \sup_y L(x,y) - y^\top u \\
+            &= \sup_{y,v} G(y,v) + x^\top v - y^\top u \\
+            &= \sup_{y,v} -(-G(y,v)) - y^\top u - (-x)^\top v = -G^*(-x,u).
+    \end{align*}
+
+    Same argument as before for the rest.
+    
+\end{proof}
+
+\begin{example}
+
+    Consider the setting $f_0,f_1,\dots,f_m$, the objective is 
+
+    \[ \inf_{x \in C} f_0(x) \text{ such that } f_i(x) \le 0. \]
+
+    We already computed $F(x,u)$ and $L(x,y)$. Then 
+
+    \[ g(y) = \inf_x L(x,y) = 
+        \begin{cases}
+            \inf_x \,f_0(x) + \sum_i y_i f_i(x) \quad \text{if } y_i \ge 0 \\
+            \\
+            -\infty \quad \text{otherwise}
+        \end{cases}
+    \]
+
+    Let's consider a subcase: the linear programming problem. We have 
+
+    \begin{align*}
+        f_0(x) &= \langle b_0, x \rangle + \beta_0,\, b_0 \in \Rn, \, \beta_0 \in \R \\
+        \\
+        f_i(x) &= \langle b_i , x \rangle + \beta_i,\, b_i \in \Rn,\, \beta_i \in \R \, \forall i.
+    \end{align*}
+
+    it is usually presented as 
+
+    \begin{align*}
+        \inf c^\top& x \\
+        \\
+        A&x \le b.
+    \end{align*}
+
+    We seek for $g(y)$ such that $g(y) = G(y,0)$. Who is $G(y,v)$? Recall that $L = f_0 + \sum_i y_i f_i$. Then 
+
+    \begin{align*}
+        G(y,v) &= \inf L(x,y) - v^\top x \\
+            &= \inf_x \langle b_0, x \rangle + \beta_0 + \sum_{i=1}^m y_i \left[\langle b_i, x \rangle + \beta_i\right] - v^\top x \\
+            &= \inf_x \beta_0 + \sum_i y_i \beta_i + \langle x, b_0 + \sum_i y_i b_i  -v \rangle \\
+            &= \begin{cases}
+                \beta_0 + \displaystyle\sum_{i=1}^m y_i \beta_i \quad \text{if } v = b_0 + \sum_i y_i b_i \\
+                \\
+                -\infty \quad \text{otherwise}
+            \end{cases}
+    \end{align*}
+
+    We imposed that $b_0 + \sum_i y_i b_i -v = 0$ because if we took $x\searrow -\infty$, then $\langle x, b_0 + \sum_i y_i b_i  -v \rangle \searrow -\infty$, therefore the infimum would be $-\infty$. Therefore the dual problem turns out to be 
+
+    \begin{align*}
+        \sup_{y \ge 0} \, &\beta_0 + \sum_{i=1}^m y_i \beta_i \\
+        &\beta_0 + \sum_{i=1}^m y_i b_i = 0.
+    \end{align*}
+
+\end{example}
+
+\begin{remark}
+    
+    Observe that $F$ jointly convex in $(x,u)$ implies $\phi$ convex. Then also $\epi{\phi} = $ projection of $\epi{f}$ through the map $(x,u,\alpha) \mapsto (u,\alpha)$. Observe that $\epi{F}$ is polyhedral, indeed is the intersection of closed halfspaces, as each $f_i$ is an affine function. Then $\epi{\phi}$ is a linear map applied to a polihedral set. This shows that $\epi{\phi}$ is closed (as seen in the previous lecture).
+
+\end{remark}
+
+
+
+
+

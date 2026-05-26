@@ -1,0 +1,145 @@
+\chapter{Lecture \thechapter{} of 14/04/2026}
+
+\begin{proposition}[Conjugate function theorem, Book 1.6.1]
+
+    Let $f : \Rn \to \Rb$ and denote with $f^*$ its conjugate, $f^{**} = (f^*)^*$. Then: 
+
+    \begin{enumerate}
+        \item[a)] $f(x) \ge f^{**}(x)$ for any $x \in \Rn$;
+        \item[b)] if $f$ is convex, then if one between $f$, $f^*$, $f^{**}$ is proper, then also the other two are;
+        \item[c)] if $f$ is closed and convex, $f(x) = f^{**}(x)$ for every $x \in \Rn$;
+        \item[d)] $f^* = \left(\ccl{f}\right)^*$. Furthermore, if $\ccl{f}$ is proper, then $\ccl{f} = f^{**}$.
+    \end{enumerate}
+    
+\end{proposition}
+
+\begin{proof}
+    
+    \underline{\textbf{a)}}: $f^*(y) = \sup_x y^\top x - f(x)$. This means $f^*(y) \ge y^\top x - f(x)$ for any $y,x$, this implies $y^\top x \le f(x) + f^*(y)$ (this last is called Fenchel's inequality). Now, 
+
+    \[ f^{**}(x) = \sup_y x^\top y - f^*(y) \le f(x). \]
+
+    \underline{\textbf{b)}}: assume $f$ is convex and proper, so $\epi{f}$ is nonempty convex set in $\Rnp$, since $f$ is proper, $\epi{f}$ does not contain any vertical line, so there exists $(y,1) \in \Rnp$, $c \in \R$ such that $y^\top x + f(x) \ge c$ for any $x \in \Rn$ (because the epigraph lies above the tangent hyperplane). This implies $f^*(-y) \le -c \implies \sup_x -y^\top x - f(x) \le -c$, so $f^*(y) < +\infty$. Is $f^* \cong -\infty$? No, indeed there exists $\bar{x}$ such that $f(\bar{x})$ is finite ($f$ is proper), hence $f^*(y) = \sup_x y^\top x - f(x) \ge t^\top x - f(\bar{x})$. This shows that $f$ is proper (the same computation holds for the others).
+
+    \underline{\textbf{c)}}: from a) we know that $f^{**}(x) \le f(x)$. We wanto to prove $f^{**}(x) \ge f(x)$, so $\epi{f^{**}} \seq \epi{f}$. By contraddiction, assume $x \in \epi{f^{**}} \setminus \epi{f}$. Then we can separate a point $\set{(x,\gamma)}$ form $\epi{f}$, also strictly, so there exists $(y,\xi)$, $\xi \neq 0$, $c \in \R$ such that
+
+    \[ y^\top z + \xi w < c < y^\top x + \xi \gamma \]
+
+    for any $(z,w) \in \epi{f}$. Observe that we can take $w \nearrow +\infty$, so we must have $\xi < 0$. Assume WLOG $\xi = -1$ (by scaling). So 
+
+    \[ y^\top z - f(z) < c < y^\top x - f^{**}(x) \quad \forall x \in \dom{f}. \]
+
+    Take the supremum over $z$, so 
+
+    \begin{align*}
+        \sup_z f^*(y) &= \sup_z y^\top z - f(x) < y^\top - f^{**}(x) \\
+            &\implies y^\top x > f^*(y) + f^{**}(x)
+    \end{align*}
+
+    which contraddicts the Fenchel's inequality.
+
+    \underline{\textbf{d)}}: define $\check{f}^* = \left(\ccl{f}\right)^*$. Then $\ccl{f}$ is a convex closed function, so $\epi{\ccl{f}} = \cl{\conv{\epi{f}}}$. We know $\cl{\conv{\epi{f}}} =$ intersection of all the closed halfspaces that contains $\epi{f}$. This implies that $-f^*(y)$ is intercept of the highest hyperplane such that $\epi{f}$ is above that hyperplane, hence $-f^*(y) = \check{f}^*(y)$ because hyperplanes below $f$ and $\ccl{f}$ are the same. This shows $f^* = \check{f}^*$, then $f^{**} = \left(\ccl{f}\right)^* = \ccl{f}$ by point c).
+
+\end{proof}
+
+\section{Convex optimization}
+
+We move now the focus onto the actual optimization of convex functions. We set ourselfs on the problem 
+
+\[ \inf_{x \in X} f(x) \]
+
+where $X \seq \Rn$, $f : X \to (-\infty,+\infty]$. We say that $x^*$ is a minimum point if it is such that 
+
+\[ x^* = \argmin_{x \in X} f(x). \]
+
+If $x \in X \cap \dom{f}$, then $f(x^*) = \inf_{x \in X} f(x) = \min_{x \in X} f(x)$, so the infimum is attained as $x^*$.
+
+We recall tha we say that $x^*$ is a 
+
+\begin{itemize}
+    \item local minima if $f(x^*) \le f(x)$ for any $x \in B(x^*,\eps)$ for some $\eps > 0$;
+    \item global minima if $f(x^*) \le f(x)$ for any $x \in X$.
+\end{itemize}
+
+\begin{proposition}[Book 3.1.1]
+    
+    Let $X \seq \Rn$ be convex, $f : X \to (-\infty,+\infty]$ be a convex function. Then local minima are global minima. In addition, if $f$ is strictly convex, then there exists at most one global minima.
+
+\end{proposition}
+
+\begin{proof}
+    
+    Assume $x^*$ local minima but not global, i.e. there exists $\bar{x}$ such that $f(\bar{x}) < f(x^*)$. Then 
+
+    \[ f(\alpha x^* + (1-\alpha)\bar{x}) \le \alpha f(x^*) + (1-\alpha)f(\bar{x}) < f(x^*) \quad \forall \alpha \in [0,1]. \]
+
+    For $\alpha \to 1$, $\alpha x^* + (1-\alpha)\bar{x} \in B(x^*,\eps)$, where $\eps$ is such that $x^*$ is local minima in $B(x^*,\eps)$, which contraddicts the fact that $x^*$ is local minima, hence it is also a global one.
+
+    Furthermore, if $f$ is striclty convex, assume $x,x^*$ two global minima, so $f(x) = f(x^*)$. By strict convexity, 
+
+    \[ f\left(\frac12 x + \frac12 x^*\right) < \frac12 f(x) + \frac12 f(x^*) = f(x). \]
+
+    This shows that $x = x^*$.
+
+\end{proof}
+
+The natural question now is: does a minimum point exists? We will see that under some condition this existance is guaranteed.
+
+\begin{definition}[Coercivity]
+
+    A function $f : \Rn \to (-\infty,+\infty]$ is \emph{coercive} if for every sequence $\set{x_k}_k \seq \Rn$ such that $\norm{x_k} \to +\infty$, we have 
+    
+    \[ \lim_{k \to +\infty} f(x_k )\to +\infty. \]
+    
+\end{definition}
+
+\begin{proposition}[Weierstrass, Book 3.2.1]
+
+    Let $f : \Rn \to (-\infty,+\infty]$ closed proper and LSC. Assume one among the following:
+
+    \begin{enumerate}
+        \item $\dom{f}$ is bounded;
+        \item there exists $\bar{\gamma}$ such that the set $\set{x : f(x) \le \bar{\gamma}}$ is nonempty and bounded;
+        \item $f$ is coercive.
+    \end{enumerate}
+
+    Then there exists $x^* \in \Rn$ such that $f(x^*) \le f(x)$ for any $x \in \Rn$, i.e. $x^*$ is a global minimum point.
+    
+\end{proposition}
+
+\begin{proof}
+    
+    Let $\set{x_k}_k$ be a minimizing sequence for $f$, so $f(x_k) \to \inf_x f(x)$. Then $\set{x_k}_k \seq \dom{f}$. 
+
+    \begin{enumerate}
+        \item If 1., $\set{x_k}_k \seq$ bounded set;
+        \item if 2., $f(x_k) \le \bar{\gamma}$ for $k$ big enough, hence $\set{x_k}_k$ is bounded;
+        \item if 3., $\set{x_k}_k$ cannot ''go to $\infty$'', otherwise $f(x_k) \to +\infty$ since $f$ is coercive.
+    \end{enumerate}
+
+    In any of these, the sequence $\set{x_k}_k$ is \emph{bounded}. By BW, up to subsequences, $x_k \to \bar{x} \in \Rn$. Using the closerness and lower semicontinuity of $f$, it holds true that 
+
+    \[ f(\bar{x}) \le \liminf_{k \to +\infty} f(x_k) = \inf_x f(x)\]
+
+    hence $\bar{x}$ is a global minimum point.
+
+\end{proof}
+
+\begin{proposition}[Book 3.2.2]
+    
+    Let $X \seq \Rn$ closed convex, $f : \Rn \to (-\infty,+\infty]$ convex closed, assume $X \cap \dom{f} \neq \emptyset$. Then the set of minima of $f$ over $X$ is nonempty if and only if $X$ and $f$ has no nonzero direction of recession.
+
+\end{proposition}
+
+\begin{proof}
+    
+    Assume $\tilde{f} = \inf_{x \in X} f(x)$. Notice that $\tilde{f} < +\infty$, because $X \cap \dom{f}$ is nonempty. Consider $\set{\gamma_k}_k$ such that $\gamma_k \to \tilde{f}$, $\gamma_k \ge \tilde{f}$ for any $k$. Define $V_k = \set{x : f(x) \le \gamma_k}$. Then the minimum point belongs to the intersection $\bigcap_k (X \cap V_k)$. The problem now is to guarantee that the latter intersection is nonempty. In fact it is nonempty, indeed 
+
+    \[ \Rc{X} \cap \Rc{V_k} = \Rc{X} \cap \Rc{f} = \set{0}. \]
+
+    By theorem 1.4.2(c) of the book, this implies the intersection nonempty.
+
+\end{proof}
+
+
+
