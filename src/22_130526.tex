@@ -32,4 +32,27 @@ Do we have convergence? Just a few words: if we choose $\theta = 1$, set $L = \n
     \end{cases}
     \]
 
+    In order to apply the Chambolle-Pock algorithm, it is needed to compute the discrete adjoint operator $\nabla^*$, which could be very large to memorize in practice. Even for a $1024 \times 1024$ pixels image, it would require approximately 8 terabytes of memory to store the full dense matrix. Even when considering a sparse matrix representation, storing the explicit structure results in a significant waste of memory. 
+
+    Instead, the adjoint operator can be implemented in a \textit{matrix-free} fashion by exploiting its analytical definition in the discrete setting. By leveraging the definition of the adjoint via the standard inner product:
+    \begin{equation}
+    \langle \nabla u, p \rangle = \langle u, \nabla^* p \rangle
+    \end{equation}
+    it can be shown that the transpose of the Forward Finite Difference (FFD) matrix used for the gradient corresponds exactly to the negative divergence operator calculated via Backward Finite Differences (BFD). 
+
+    Therefore, rather than storing a massive matrix and performing costly matrix-vector multiplications, $\nabla^*$ can be computed on the fly using a highly efficient, pixel-by-pixel local stencil operation. This approach reduces the operator's memory footprint to zero, significantly optimizes cache reuse, and makes the algorithm ideally suited for massive parallelization on modern GPU architectures.
+
+    Therefore we seek for the adjoint operator. Notice that 
+
+    \begin{align*}
+        \langle u,v \rangle_X &= \sum_{ij} u_{ij}v_{ij} \\
+        \langle p,q \rangle_Y &= \sum_{ij} p_{ij}^1 q_{ij}^1 + p_{ij}^2 q_{ij}^2.
+    \end{align*}
+
+    The goal is to have something in the form $\sum_{ij} u_{ij} (\nabla^* p)_{ij}$. Idea: take only the terms where $u_{ij}$ appears, i.e. $-p^1_{ij},-p^2_{ij}$ and $p_{i-1,j}^1, p_{i,j-1}^2$ as when i consider the $i-1$ i get $u_{ij} - u_{i-1,j}$, therefore a term with index $(ij)$ appears. Therefore 
+
+    \[ (\nabla^* p)_{ij} = - \left(\frac{p_{ij}^1 - p_{i-1,j}^2}{h}\right) - \left(\frac{p_{ij}^2 - p_{i,j-1}^2}{h}\right) \]
+
+    which is the negative distcrete divergence computed with backward finite differences.
+
 \end{example}

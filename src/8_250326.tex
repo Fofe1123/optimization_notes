@@ -42,12 +42,10 @@
     
 \end{example}
 
-\begin{proposition}[Recession cone theorem]
+\begin{proposition}[Recession cone theorem1.4.1]
 
     Let $C$ closed convex nonempty. Then 
-d functions. This methodology is fundamental
-in several convex optimization contexts, including the issue of existence of
-optimal solutions, which will be discu
+
     \begin{enumerate}
         \item[a)] $\Rc{C}$ is closed and convex;
         \item[b)] $d \in \Rc{C} \iff$ there exists $x \in C$ such that $x + \alpha d \in C$ for all $\alpha \ge 0$.
@@ -63,15 +61,15 @@ optimal solutions, which will be discu
 
     \begin{figure}[ht!]
         \centering
-        \includegraphics[width=0.5\textwidth]{img/proofRec.png}
+        \includegraphics[width=0.4\textwidth]{img/proofRec.png}
         \caption{Visual intuition on the sequence $z_k$}
     \end{figure}
 
-    Let $d \in \Rn$ and assume $x \in C$ such that $x + \alpha d \in C$ for any $\alpha \ge 0$. Let $\bar{x} \in C$. We have to prove $\bar{x} + \alpha d \in C$. Assume, without loss of generality, $\alpha = 1$ as we can retrive the general case with a scaling argument. Define a sequence $z_k = x + kd$, $z_k \in C$ for all $k$. If $\bar{x} = z_k$ for some $k$ then we are done. Assume then $\bar{x} \neq x_k$ and define $d_k \displaystyle\frac{z_k -\bar{x}}{\norm{z_k - \bar{x}}} \norm{d}$. Then 
+    Let $d \in \Rn$ and assume $x \in C$ such that $x + \alpha d \in C$ for any $\alpha \ge 0$. Let $\bar{x} \in C$. We have to prove $\bar{x} + \alpha d \in C$. Assume, without loss of generality, $\alpha = 1$ as we can retrive the general case with a scaling argument. Define a sequence $z_k = x + kd$, $z_k \in C$ for all $k$. If $\bar{x} = z_k$ for some $k$ then we are done. Assume then $\bar{x} \neq x_k$ and define $d_k = \displaystyle\frac{z_k -\bar{x}}{\norm{z_k - \bar{x}}} \norm{d}$. Then 
 
     \begin{align*}
         d_k &= \frac{z_k -\bar{x} + x - x}{\norm{z_k - \bar{x}}} \norm{d} = \frac{\overbrace{z_k - x}^{= kd}}{\norm{z_k - \bar{x}}}\norm{d} + \frac{x - \bar{x}}{\norm{z_k - \bar{x}}} \\
-        &= \frac{k\norm{d}}{\norm{z_k - \bar{x}}}d + frac{x - \bar{x}}{\norm{z_k - \bar{x}}}. 
+        &= \frac{k\norm{d}}{\norm{z_k - \bar{x}}}d + \frac{x - \bar{x}}{\norm{z_k - \bar{x}}}. 
     \end{align*}
 
     The last term goes to 0, indeed, $x - \bar{x}$ is fixed, $\norm{d}$ is fixed and $\norm{z_k} \nearrow +\infty$ as $k \nearrow +\infty$. I claim that the first term goes to $d$: in fact,

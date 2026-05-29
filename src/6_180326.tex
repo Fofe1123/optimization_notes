@@ -1,6 +1,6 @@
 \chapter{Lecture \thechapter{} of 18/03/2026}
 
-\begin{theorem}[Charateodory]
+\begin{theorem}[Charateodory, Book 1.2.1]
 
     Let $X \seq \Rn$ be nonempty. Then
     
@@ -15,7 +15,7 @@
     
     We prove a) and b) separately.
 
-    \paragraph{a):} Let $y \in \cone{X} \implies y = \displaystyle\sum{i=1}^m \alpha_i x_i$, where $\alpha_i > 0$, $x_i \in X$. We can assume $m$ to be the smallest index such that this representation holds true. We have to prove that $x_1,\dots,x_m$ to be linearly independent. By contraddiction, assume them dependent, so there exists $\lambda_1,\dots,\lambda_m \in \R$ such that $\displaystyle\sum_{i=1}^m \lambda_i x_i = 0$. Without loss of generality, assume at least one $\lambda_i > 0$. Define $\bar{\gamma} = \max\set{\gamma : \alpha_i -\gamma\lambda_i \ge 0} < +\infty$. Observe that we can write $y = \displaystyle\sum_i \alpha_i x_i + \bar{\gamma} \underbrace{\displaystyle\sum_i \lambda_i x_i}_{=0} = \displaystyle\sum_{i=1}^m (\alpha_i - \bar{\gamma}\lambda_i)x_i$. Then at leas one of the last coefficents is zero, which is in contraddiction with the minimality of $m$.
+    \paragraph{a):} Let $y \in \cone{X} \implies y = \displaystyle\sum_{i=1}^m \alpha_i x_i$, where $\alpha_i > 0$, $x_i \in X$. We can assume $m$ to be the smallest index such that this representation holds true. We have to prove that $x_1,\dots,x_m$ to be linearly independent. By contraddiction, assume them dependent, so there exists $\lambda_1,\dots,\lambda_m \in \R$ such that $\displaystyle\sum_{i=1}^m \lambda_i x_i = 0$. Without loss of generality, assume at least one $\lambda_i > 0$. Define $\bar{\gamma} = \max\set{\gamma : \alpha_i -\gamma\lambda_i \ge 0} < +\infty$. Observe that we can write $y = \displaystyle\sum_i \alpha_i x_i + \bar{\gamma} \underbrace{\displaystyle\sum_i \lambda_i x_i}_{=0} = \displaystyle\sum_{i=1}^m (\alpha_i - \bar{\gamma}\lambda_i)x_i$. Then at leas one of the last coefficents is zero, which is in contraddiction with the minimality of $m$.
 
     \paragraph{b):} Consider the set $Y = \set{(y,1) : y \in X} \seq \Rnp$. Let $x \in \conv{X} \implies x = \displaystyle\sum_{i=1}^m \gamma_i x_i$, $\displaystyle\sum_i\gamma_i = 1$. The point $(x,1) \in \cone{Y} \implies \displaystyle\sum_i \gamma_i (x_i,1) = (x,1)$. By point a), $(x,1) = \displaystyle\sum_{i=1}^m \alpha_i(\tilde{x}_i,1)$, with $(\tilde{x}_i,1)$ linearly independent in $Y$. Hence $x = \displaystyle\sum_{i=1}^m \alpha_i \tilde{x}_i$ with $\displaystyle\sum_i \alpha_i = 1$. From the fact that $(\tilde{x}_i,1)$ are independent in $Y$, we conclude that $m \le n+1$.
 
@@ -61,7 +61,7 @@ If we consider a convex set in $\Rn$ which lives on an $m$-dimensional variety, 
 
 \end{definition}
 
-\begin{proposition}[Line-segment principle (LSP)]
+\begin{proposition}[Line-segment principle (LSP), Book 1.3.1]
 
     Let $C$ be a nonempty convex set. If $x \in \ri{C}$ and $\bar{x} \in \cl{C}$, then all points on the line segment connecting $x$ and $\bar{x}$, except possibly $\bar{x}$ belongs to $\ri{C}$.
     

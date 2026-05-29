@@ -2,7 +2,7 @@
 
 We ask ourselfs what happens if $f$ is convex and we add some regularity hypotesis. We first remark that if $f$ is differentiable at $c$, near this point, the function looks like an hyperplane. The intuition is: function must be always above its tangent hyperplane.
 
-\begin{proposition}
+\begin{proposition}[Book 1.1.7]
     
     Let $C \seq \Rn$ be convex, $A \seq \Rn$ open s.t. $C \seq A$. Let $f: A \to \R$ convex and differentiable. Then 
 
@@ -57,7 +57,7 @@ so $f$ decreases in the direction $z - x^*$, which contrdaddicts the fact that $
 
 We summarize this fact in the following proposition, which proof what we just did.
 
-\begin{proposition}
+\begin{proposition}[Book 1.1.8]
     
     Let $C \seq \Rn$ be convex, $f: \Rn \to \R$ be differentiable on a convex open set $A \seq C$. Then a point $x^* \in C$ is a minimum for $f$ if and only if 
 
@@ -65,9 +65,9 @@ We summarize this fact in the following proposition, which proof what we just di
 
 \end{proposition}
 
-\begin{theorem}[Projection theorem]
+\begin{theorem}[Projection theorem, Book 1.1.9]
 
-    Let $C$ be a nonempty convex closed sunset of $\Rn$, $z \in \Rn$. Then there exists a unique vector $x^* \in C$ (the projection of $z$ on $C$) that minimizes the function $f(x) = \norm{x- z}$ over $C$. 
+    Let $C$ be a nonempty convex closed subset of $\Rn$, $z \in \Rn$. Then there exists a unique vector $x^* \in C$ (the projection of $z$ on $C$) that minimizes the function $f(x) = \norm{x- z}$ over $C$. 
 
     Furthermore, the point $x^*$ is the projection of $z$ onto $C$ if and only if 
 
@@ -77,7 +77,7 @@ We summarize this fact in the following proposition, which proof what we just di
 
 \begin{proof}
     
-    Optimizing the function $f(x) = \norm{z-x}$ is the same as optimizing the funciton $f(x) = \frac12 \norm{z-x}^2$. Then $f$ is now differentiable, and $\nabla f(x) = z-x$. 
+    Optimizing the function $f(x) = \norm{z-x}$ is the same as optimizing the funciton $f(x) = \frac12 \norm{z-x}^2$. Then $f$ is now differentiable, and $\nabla f(x) = x-z$. 
 
     \begin{align*}
         x^* \text{ is minimum }&\iff \langle \nabla f(x^*), x - x^* \rangle \ge 0 \quad \forall x \in C \\
@@ -91,8 +91,8 @@ We summarize this fact in the following proposition, which proof what we just di
     We notice that we are optimizing a continous function on a closed set, as we are optimizing on $C \cap \overline{B(z,\norm{z-w})}$, so, by Weierstrass there exists a minimum. This is also unique, indeed, let $x^*_1,x^*_2$ be two minima, then 
 
     \begin{align*}
-        \langle z - x^*_1, x^*_2-x^*1 \rangle &\le 0 \quad \forall z \in C \\
-        \langle z - x^*_2, x^*_2-x^*1 \rangle &\le 0 \quad \forall z \in C
+        \langle z - x^*_1, x^*_2-x^*_1 \rangle &\le 0 \quad \forall z \in C \\
+        \langle z - x^*_2, x^*_2-x^*_1 \rangle &\le 0 \quad \forall z \in C
     \end{align*}
 
     Taking the sum ad using the linearity of the scalar product, we obtain 

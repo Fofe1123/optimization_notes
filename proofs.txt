@@ -1,0 +1,39 @@
+Regarding proofs, here is a (long) list of required proofs (numbering is referring to the textbook):
+
+every proof discussed in Lecture 1 and Lecture 2
+Proposition 1.1.1 facile
+Proposition 1.1.2 facile
+Proposition 1.1.4 facile
+Proposition 1.1.6 facile
+Proposition 1.1.7 boh
+Proposition 1.1.8 facile
+Proposition 1.1.9 (projection) facile
+Proposition 1.2.1 ok
+Proposition 1.3.1 (LSP)
+Proposition 1.3.3 (prolongation lemma) facile
+Proposition 1.3.11 (continouità funzioni convesse) facile
+Proposition 1.3.13 senza nome
+Proposition 1.3.14 senza nome 
+Proposition 1.4.1 (recession cone theorem) facile
+Example 1.4.1     (cono/spazio lineare programmazione quadratica)
+Proposition 1.4.5 facile
+Proposition 1.4.6 ok
+Proposition 1.4.12 facile
+Proposition 1.4.13 boh
+Proposition 1.5.1  ok
+Proposition 1.5.2  facile
+Proposition 1.5.3(b) facile
+Proposition 1.5.4  
+Proposition 1.6.1
+Proposition 3.1.1
+Proposition 3.2.1
+Proposition 3.2.2
+Proposition 3.2.4
+Proposition 3.3.1(a)
+every proof discussed in Lecture 15 and Lecture 16
+every proof discussed in Lecture 17
+every proof discussed in Lecture 18, excluding the proof of the Theorem at page 2 of the notes (Theorem 15 in Rockafellar's book)
+every derivation discussed in Lecture 19, excluding the example on STP
+every proof discussed in Lecture 20
+every proof and every derivation discussed in Lecture 21
+Lectures 22, 23, and 24 contain no formal proofs, but any discussions or derivations presented can be part of the exam

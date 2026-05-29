@@ -41,7 +41,7 @@
 
 \end{proof}
 
-\begin{lemma}[Prolungation lemma]
+\begin{lemma}[Prolungation lemma, Book 1.3.3]
 
     Let $C \seq \R^d$ convex nonempty. A vector $x \in C$ belongs to $\ri{C}$ if and only if for any $\bar{x} \in C$ there exists a $\gamma > 0$ such that $x + \gamma(x - \bar{x}) \in C (*)$, i.e. every line segment connecting $x$ to any $\bar{x}$ can be prolongated beyond $x$ without leaving $C$.
     
@@ -84,7 +84,7 @@
 
 An immediate consequence is that if $f(x) = a^\top x$ with $a \in \Rn$, then the minima of this function is attained at the boundary of its domain (which is assumed to be convex).
 
-\begin{proposition}[Continuity of convex funcitons]
+\begin{proposition}[Continuity of convex funcitons, Book 1.3.11]
     
     If $f : \Rn \to \R$ is convex, then $f$ is continous. More generally, if $f : \Rn \to \Rb$ is proper and convex, then the restriction of $f$ to $\dom{f}$ is continous in $\ri{\dom{f}}$.
 
@@ -92,7 +92,7 @@ An immediate consequence is that if $f(x) = a^\top x$ with $a \in \Rn$, then the
 
 \begin{proof}
     
-    Assume $0 \in \dom{f}$ (if not translate). Without loss of generality, assume that the set $X = \set{x : \norm{x}_\infty \le 1} \seq \dom{f}$ (up to dilatation). It is now sufficent to prove that $f$ is continous at $0$: for any sequence $\set{x_k}_k$ such that $kx_k \to 0$ we want to prove $f(x_k) \to f(0)$. Define $e_i$, for $i = 1,\dots,2^n$ the corners of $X$. Let $x \in X$, then 
+    Assume $0 \in \dom{f}$ (if not translate). Without loss of generality, assume that the set $X = \set{x : \norm{x}_\infty \le 1} \seq \dom{f}$ (up to dilatation). It is now sufficent to prove that $f$ is continous at $0$: for any sequence $\set{x_k}_k$ such that $x_k \to 0$ we want to prove $f(x_k) \to f(0)$. Define $e_i$, for $i = 1,\dots,2^n$ the corners of $X$. Let $x \in X$, then 
 
     \[ x = \sum_{i=1}^{2^n} \alpha_i e_i\quad \sum_i \alpha_i = 1, \, \alpha_i \ge 0. \]
 
@@ -116,13 +116,13 @@ An immediate consequence is that if $f(x) = a^\top x$ with $a \in \Rn$, then the
 
     \[ \limsup_k f(x_k) \le f(0). \]
 
-    Do similarly with $z_k$: 
+    DFor $z_k$ instead:
 
     \begin{align*}
-        f(0) &= f\left(\frac{1}{1+\norm{x_k}x_k} + \frac{\norm{x_k}}{1+\norm{x_k}0}\right) \le \liminf_k f(x_k).
+        f(0) &= f\left(\frac{1}{1+\norm{x_k}}x_k + \frac{\norm{x_k}}{1+\norm{x_k}}z_k\right) \le \liminf_k f(x_k).
     \end{align*}
 
-    Hence $f(0) \le \liminf_k f(x_k) \limsup_k f(x_k) \le f(0)$. This shows that $f$ is continous at 0.
+    Hence $f(0) \le \liminf_k f(x_k) \le \limsup_k f(x_k) \le f(0)$. This shows that $f$ is continous at 0.
 
 \end{proof}
 
@@ -148,7 +148,7 @@ It can be proven that $\ccl{f} = \cl{F}$ where
     \caption{Example of convex closure of a function}
 \end{figure}
 
-\begin{proposition}
+\begin{proposition}[Book 1.3.13]
     
     Let $f : X \to \Rb$. Then 
 
