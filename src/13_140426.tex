@@ -19,7 +19,7 @@
 
     \[ f^{**}(x) = \sup_y x^\top y - f^*(y) \le f(x). \]
 
-    \underline{\textbf{b)}}: assume $f$ is convex and proper, so $\epi{f}$ is nonempty convex set in $\Rnp$, since $f$ is proper, $\epi{f}$ does not contain any vertical line, so there exists $(y,1) \in \Rnp$, $c \in \R$ such that $y^\top x + f(x) \ge c$ for any $x \in \Rn$ (because the epigraph lies above the tangent hyperplane). This implies $f^*(-y) \le -c \implies \sup_x -y^\top x - f(x) \le -c$, so $f^*(y) < +\infty$. Is $f^* \cong -\infty$? No, indeed there exists $\bar{x}$ such that $f(\bar{x})$ is finite ($f$ is proper), hence $f^*(y) = \sup_x y^\top x - f(x) \ge t^\top x - f(\bar{x})$. This shows that $f$ is proper (the same computation holds for the others).
+    \underline{\textbf{b)}}: assume $f$ is convex and proper, so $\epi{f}$ is nonempty convex set in $\Rnp$, since $f$ is proper, $\epi{f}$ does not contain any vertical line, so there exists $(y,1) \in \Rnp$, $c \in \R$ such that $y^\top x + f(x) \ge c$ for any $x \in \Rn$ (because the epigraph lies above the tangent hyperplane). This implies $f^*(-y) \le -c \implies \sup_x -y^\top x - f(x) \le -c$, so $f^*(y) < +\infty$. Is $f^* \equiv -\infty$? No, indeed there exists $\bar{x}$ such that $f(\bar{x})$ is finite ($f$ is proper), hence $f^*(y) = \sup_x y^\top x - f(x) \ge y^\top x - f(\bar{x})$. This shows that $f$ is proper (the same computation holds for the others).
 
     \underline{\textbf{c)}}: from a) we know that $f^{**}(x) \le f(x)$. We wanto to prove $f^{**}(x) \ge f(x)$, so $\epi{f^{**}} \seq \epi{f}$. By contraddiction, assume $x \in \epi{f^{**}} \setminus \epi{f}$. Then we can separate a point $\set{(x,\gamma)}$ form $\epi{f}$, also strictly, so there exists $(y,\xi)$, $\xi \neq 0$, $c \in \R$ such that
 
@@ -127,7 +127,7 @@ The natural question now is: does a minimum point exists? We will see that under
 
 \begin{proposition}[Book 3.2.2]
     
-    Let $X \seq \Rn$ closed convex, $f : \Rn \to (-\infty,+\infty]$ convex closed, assume $X \cap \dom{f} \neq \emptyset$. Then the set of minima of $f$ over $X$ is nonempty if and only if $X$ and $f$ has no nonzero direction of recession.
+    Let $X \seq \Rn$ closed convex, $f : \Rn \to (-\infty,+\infty]$ convex closed, assume $X \cap \dom{f} \neq \emptyset$. Then the set of minima of $f$ over $X$ is nonempty if and only if $X$ and $f$ has no nonzero common direction of recession.
 
 \end{proposition}
 
